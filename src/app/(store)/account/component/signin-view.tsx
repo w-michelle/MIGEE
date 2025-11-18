@@ -1,0 +1,110 @@
+"use client";
+import Link from "next/link";
+import { useActionState, useState } from "react";
+import { Input } from "./Input";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import loginUser from "@/app/data/mutations/loginUser";
+import { FiAlertOctagon } from "react-icons/fi";
+const SignInView = () => {
+  const [pending, setPending] = useState(false);
+
+  const formSchema = z.object({
+    email: z.email(),
+    password: z.string().min(1, { message: "Password is required" }),
+  });
+
+  const {
+    register,
+
+    formState: { errors },
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const initialState = {
+    message: "",
+    issues: [],
+  };
+
+  const [state, formAction, isPending] = useActionState(
+    loginUser,
+    initialState,
+  );
+
+  console.log("state message", state.message);
+
+  return (
+    <div className="p-8 rounded-lg">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-xl font-bold">Welcome Back</h1>
+        <p>Login to Your Account</p>
+        <div className="text-center text-sm">
+          Dont&apos;t have an account?{" "}
+          <Link
+            href="/account/register"
+            className="underline underline-offset-4 hover:text-black"
+          >
+            Register
+          </Link>
+        </div>
+      </div>
+      <div className="mt-6">
+        <form
+          action={formAction}
+          className="flex flex-col gap-4"
+        >
+          <Input
+            type="email"
+            label="Email"
+            placeholder="Email"
+            id="email"
+            disabled={isPending}
+            register={register("email")}
+          />
+
+          <Input
+            type="password"
+            label="Password"
+            placeholder="Password"
+            id="password"
+            disabled={isPending}
+            register={register("password")}
+          />
+          {state?.issues && (
+            <div className="text-red-500">
+              <ul>
+                {state.issues.map((issue: string) => (
+                  <li
+                    key={issue}
+                    className="flex gap-1"
+                  >
+                    <FiAlertOctagon fill="red" />
+                    {issue}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={pending}
+            className={`text-white w-full font-bold bg-amber-950 py-3 px-3 rounded-md hover:bg-neutral-900 hover:cursor-pointer`}
+          >
+            SIGN IN
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default SignInView;
