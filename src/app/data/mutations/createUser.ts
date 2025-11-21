@@ -2,7 +2,6 @@
 
 import { shopifyFetch } from "@/lib/shopify";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
 import { z } from "zod";
 
 type FormState = {
@@ -15,7 +14,7 @@ const SIGNUP_MUTATION = `
 mutation customerCreate($input: CustomerCreateInput!) {
     customerCreate(input: $input) {
         customerUserErrors { code message field}
-        customer { id email }
+        customer { id email acceptsMarketing }
     }
 }
 `;
@@ -24,6 +23,7 @@ const schema = z.object({
   lastName: z.string().min(1),
   email: z.email(),
   password: z.string().min(1, { message: "Password is required" }),
+  acceptsMarketing: z.boolean(),
 });
 
 export default async function createUser(
@@ -35,7 +35,12 @@ export default async function createUser(
     lastName: formData.get("lastName"),
     email: formData.get("email"),
     password: formData.get("password"),
+    acceptsMarketing:
+      formData.get("acceptsMarketing") === "on" ||
+      formData.get("acceptsMarketing") === "true",
   });
+
+  console.log("formData", formData);
 
   if (!parse.success) {
     return {
@@ -52,6 +57,7 @@ export default async function createUser(
       lastName: data.lastName,
       email: data.email,
       password: data.password,
+      acceptsMarketing: data.acceptsMarketing,
     },
   });
 
