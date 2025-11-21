@@ -8,19 +8,20 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import createUser from "@/app/data/mutations/createUser";
 
+const formSchema = z.object({
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  email: z.email(),
+  password: z.string().min(1, { message: "Password is required" }),
+  acceptsMarketing: z.boolean(),
+});
+
 const SignUpView = () => {
   const [error, setError] = useState<string | null>(null);
 
-  const formSchema = z.object({
-    firstName: z.string().min(1),
-    lastName: z.string().min(1),
-    email: z.email(),
-    password: z.string().min(1, { message: "Password is required" }),
-  });
-
   const {
     register,
-
+    watch,
     formState: { errors },
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,9 +30,11 @@ const SignUpView = () => {
       lastName: "",
       email: "",
       password: "",
+      acceptsMarketing: true,
     },
   });
 
+  const acceptsMarketing = watch("acceptsMarketing");
   const initialState = {
     message: "",
     issues: [],
@@ -101,7 +104,7 @@ const SignUpView = () => {
                 {state.issues.map((issue: string) => (
                   <li
                     key={issue}
-                    className="flex gap-1"
+                    className="flex items-center gap-1"
                   >
                     <FiAlertOctagon fill="red" />
                     {issue}
@@ -110,6 +113,19 @@ const SignUpView = () => {
               </ul>
             </div>
           )}
+          <div className="flex items-center gap-2 justify-center w-full border-1">
+            <input
+              {...register("acceptsMarketing", {
+                setValueAs: (v) => Boolean(v),
+              })}
+              type="checkbox"
+              id="acceptsMarketing"
+              disabled={isPending}
+              className="accent-amber-950"
+              checked={acceptsMarketing}
+            />
+            <label className="text-sm">SUBSCRIBE TO OUR NEWSLETTER</label>
+          </div>
 
           <button
             type="submit"

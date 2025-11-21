@@ -1,4 +1,7 @@
+import ProductPreviewMedia from "@/components/productPreviewMedia";
+
 import { TrolleyIcon } from "@sanity/icons";
+import { BsCloudArrowDown } from "react-icons/bs";
 import { defineField, defineType } from "sanity";
 
 export const product = defineType({
@@ -6,66 +9,160 @@ export const product = defineType({
   title: "Products",
   type: "document",
   icon: TrolleyIcon,
+  groups: [
+    { title: "Content", name: "content", default: true },
+    { title: "Settings", name: "settings" },
+    { title: "Shopify Data", name: "shopify", icon: BsCloudArrowDown },
+  ],
+  fieldsets: [
+    {
+      title: "",
+      name: "2up",
+      options: { columns: 2 },
+    },
+  ],
   fields: [
     defineField({
-      name: "name",
-      title: "Product Name",
+      title: "Display Title",
+      name: "title",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      group: "content",
     }),
     defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: "name",
-        maxLength: 96,
-      },
-      validation: (Rule) => Rule.required(),
+      title: "Shopify Description",
+      name: "shopifyDescription",
+      type: "text",
+      readOnly: true,
+      group: "content",
     }),
     defineField({
-      name: "image",
-      title: "Product Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: "description",
       title: "Description",
+      name: "description",
       type: "blockContent",
+      group: "content",
+    }),
+
+    defineField({
+      title: "SEO / Share Settings",
+      name: "seo",
+      type: "seo",
+      group: "settings",
     }),
     defineField({
+      title: "Product Title",
+      name: "productTitle",
+      type: "string",
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "Product ID",
+      name: "productID",
+      type: "number",
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "Shopify Image",
+      name: "productImage",
+      type: "url",
+      readOnly: true,
+      group: "shopify",
+    }),
+    defineField({
+      title: "Price (cents)",
       name: "price",
-      title: "Price",
       type: "number",
-      validation: (Rule) => Rule.required().min(0),
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
     }),
     defineField({
-      name: "categories",
-      title: "Categories",
+      title: "Compare Price (cents)",
+      name: "comparePrice",
+      type: "number",
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "In Stock?",
+      name: "inStock",
+      type: "boolean",
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "Low Stock?",
+      name: "lowStock",
+      type: "boolean",
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "SKU",
+      name: "sku",
+      type: "string",
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "URL Slug",
+      name: "slug",
+      type: "slug",
+      readOnly: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "Options",
+      name: "options",
       type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
+      of: [{ type: "productOption" }],
+      readOnly: false,
+      group: "shopify",
     }),
     defineField({
-      name: "stock",
-      title: "Stock",
-      type: "number",
-      validation: (Rule) => Rule.min(0),
+      title: "Draft Mode",
+      name: "isDraft",
+      type: "boolean",
+      readOnly: true,
+      hidden: true,
+      fieldset: "2up",
+      group: "shopify",
+    }),
+    defineField({
+      title: "Deleted from Shopify?",
+      name: "wasDeleted",
+      type: "boolean",
+      readOnly: true,
+      hidden: true,
+      fieldset: "2up",
+      group: "shopify",
     }),
   ],
   preview: {
     select: {
-      title: "name",
-      media: "image",
+      wasDeleted: "wasDeleted",
+      title: "title",
       subtitle: "price",
+      productTitle: "productTitle",
+      media: "productImage",
+      slug: "slug",
     },
-    prepare(select) {
+    prepare({ productTitle, subtitle, media, slug }) {
+      const slugValue = slug?.current || "missing-slug";
+      const path = `/products/${slugValue}`;
+
       return {
-        title: select.title,
-        subtitle: `$${select.subtitle}`,
-        media: select.media,
+        title: productTitle,
+        subtitle: path,
+        media: () => ProductPreviewMedia({ url: media }),
       };
     },
   },
