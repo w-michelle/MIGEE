@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import loginUser from "@/app/data/mutations/loginUser";
+import loginUser from "@/app/data/mutations/auth/loginUser";
 import { FiAlertOctagon } from "react-icons/fi";
 const SignInView = () => {
   const [pending, setPending] = useState(false);

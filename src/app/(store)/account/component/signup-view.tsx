@@ -6,7 +6,7 @@ import { FiAlertOctagon } from "react-icons/fi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import createUser from "@/app/data/mutations/createUser";
+import createUser from "@/app/data/mutations/auth/createUser";
 
 const formSchema = z.object({
   firstName: z.string().min(1),

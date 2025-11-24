@@ -1,10 +1,14 @@
+"use client";
 import Image from "next/image";
 import Form from "next/form";
 import { LuUserRound } from "react-icons/lu";
 import { LuShoppingBag } from "react-icons/lu";
 import Link from "next/link";
+import { useCartStore } from "@/store/cartStore";
 
 function Header() {
+  const { toggleCart } = useCartStore();
+
   return (
     <header>
       <div className="flex items-center justify-between gap-4 px-4">
@@ -41,7 +45,12 @@ function Header() {
           <Link href="/account">
             <LuUserRound size={22} />
           </Link>
-          <LuShoppingBag size={22} />
+          <button
+            onClick={() => toggleCart()}
+            className="cursor-pointer"
+          >
+            <LuShoppingBag size={22} />
+          </button>
         </div>
       </div>
     </header>

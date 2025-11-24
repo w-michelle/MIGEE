@@ -1,5 +1,5 @@
 "use client";
-import logoutUser from "@/app/data/mutations/logoutUser";
+import logoutUser from "@/app/data/mutations/auth/logoutUser";
 import Loader from "@/components/Loader";
 
 import { useState } from "react";
