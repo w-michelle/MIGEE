@@ -9,7 +9,7 @@ async function Banner() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-10 mx-2 rounded-lg shadow-lg">
+    <div className="bg-black text-sm text-center text-white px-6 py-1 shadow-lg">
       {promo.text}
     </div>
   );
