@@ -3,7 +3,17 @@ import { defineQuery } from "next-sanity";
 
 export const getProductBySlug = async (slug: string) => {
   const PRODUCT_BY_ID_QUERY = defineQuery(`
-    *[_type == "product" && slug.current == $slug] | order(name asc)[0]
+    *[_type == "product" && slug.current == $slug] | order(name asc)[0]{
+      ...,
+      optionSettings,
+      "optionSettingsResolved": optionSettings[]{
+        forOption,
+        "color": color->color
+      },
+        "variants": *[_type == "productVariant" && string(productID) == string(^.productID) ] {
+        ...,
+      }
+  }
     `);
 
   try {

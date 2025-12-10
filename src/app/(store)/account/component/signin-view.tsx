@@ -32,6 +32,7 @@ const SignInView = () => {
   const initialState = {
     message: "",
     issues: [],
+    data: { email: "", password: "" },
   };
 
   const [state, formAction, isPending] = useActionState(
@@ -39,7 +40,7 @@ const SignInView = () => {
     initialState,
   );
 
-  console.log("state message", state.message);
+  console.log("state data", state.data, state.issues);
 
   return (
     <div className="p-8 rounded-lg">
@@ -66,6 +67,7 @@ const SignInView = () => {
             label="Email"
             placeholder="Email"
             id="email"
+            defaultValue={state.data?.email}
             disabled={isPending}
             register={register("email")}
           />
@@ -75,6 +77,7 @@ const SignInView = () => {
             label="Password"
             placeholder="Password"
             id="password"
+            defaultValue={state.data?.password || ""}
             disabled={isPending}
             register={register("password")}
           />
@@ -84,9 +87,9 @@ const SignInView = () => {
                 {state.issues.map((issue: string) => (
                   <li
                     key={issue}
-                    className="flex gap-1"
+                    className="flex items-center gap-1 text-sm text-red-400"
                   >
-                    <FiAlertOctagon fill="red" />
+                    <FiAlertOctagon />
                     {issue}
                   </li>
                 ))}

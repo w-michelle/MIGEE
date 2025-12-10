@@ -11,6 +11,7 @@ export const product = defineType({
   icon: TrolleyIcon,
   groups: [
     { title: "Content", name: "content", default: true },
+    { title: "Photos", name: "photos" },
     { title: "Settings", name: "settings" },
     { title: "Shopify Data", name: "shopify", icon: BsCloudArrowDown },
   ],
@@ -43,10 +44,28 @@ export const product = defineType({
     }),
 
     defineField({
+      title: "Option Settings",
+      name: "optionSettings",
+      type: "array",
+      of: [{ type: "productOptionSettings" }],
+      description: "Define additional settings for product options",
+      group: "settings",
+    }),
+    defineField({
       title: "SEO / Share Settings",
       name: "seo",
       type: "seo",
       group: "settings",
+    }),
+
+    defineField({
+      title: "Gallery",
+      name: "galleryPhotos",
+      type: "array",
+      of: [{ type: "productGalleryPhotos" }],
+      description:
+        "Define a Gallery for your product, or for a subset of variants",
+      group: "photos",
     }),
     defineField({
       title: "Product Title",
@@ -56,6 +75,7 @@ export const product = defineType({
       fieldset: "2up",
       group: "shopify",
     }),
+
     defineField({
       title: "Product ID",
       name: "productID",
@@ -71,6 +91,7 @@ export const product = defineType({
       readOnly: true,
       group: "shopify",
     }),
+
     defineField({
       title: "Price (cents)",
       name: "price",

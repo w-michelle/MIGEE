@@ -104,9 +104,9 @@ const SignUpView = () => {
                 {state.issues.map((issue: string) => (
                   <li
                     key={issue}
-                    className="flex items-center gap-1"
+                    className="flex items-center gap-1 text-sm text-red-400"
                   >
-                    <FiAlertOctagon fill="red" />
+                    <FiAlertOctagon />
                     {issue}
                   </li>
                 ))}

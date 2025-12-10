@@ -1,5 +1,5 @@
 import { create } from "zustand";
-type ModalType = "cart" | null;
+type ModalType = "menu" | null;
 
 interface ModalStore {
   openModal: ModalType;

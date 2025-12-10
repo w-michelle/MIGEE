@@ -3,10 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { SanityLive } from "@/sanity/lib/live";
 import Header from "@/components/Header";
-import { cookies } from "next/headers";
 import CartInitialize from "@/components/CartInitialize";
 import Cart from "@/components/Cart";
 import Banner from "@/components/Banner";
+import MenuModal from "@/components/modals/menuModal";
+import { Footer } from "@/components/Footer";
+import Newsletter from "@/components/Newsletter";
+import { cookies } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,13 +33,12 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const cartId = cookieStore.get("cartId")?.value ?? null;
-
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <main>
+        <main className="text-gray-800">
           <Banner />
           <Header />
           {/*hydrate zustand  */}
@@ -44,6 +46,9 @@ export default async function RootLayout({
           {children}
           <Cart />
         </main>
+        <MenuModal />
+        <Newsletter />
+        <Footer />
         <SanityLive />
       </body>
     </html>

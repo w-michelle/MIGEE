@@ -1,5 +1,5 @@
 "use client";
-import logoutUser from "@/app/data/mutations/auth/logoutUser";
+
 import Loader from "@/components/Loader";
 
 import { useState } from "react";
@@ -11,37 +11,40 @@ interface CustomerProps {
 }
 
 const AccountView = ({ customer }: { customer: CustomerProps }) => {
-  const [loading, setLoading] = useState(false);
-  const handleLogout = async () => {
-    setLoading(true);
-    try {
-      await logoutUser();
-    } catch (error) {
-      console.log("something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const [loading, setLoading] = useState(false);
 
-  if (loading) {
-    return (
-      <div className="h-screen bg-neutral-200">
-        <Loader />
-      </div>
-    );
-  }
+  // const handleLogout = async () => {
+  //   setLoading(true);
+  //   try {
+  //     await fetch("/logout");
+  //     window.location.href=""
+  //   } catch (error) {
+  //     console.log("something went wrong");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // if (loading) {
+  //   return (
+  //     <div className="h-screen bg-neutral-200">
+  //       <Loader />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="flex gap-6 p-6 mt-4">
       <div className="space-y-2 font-bold">
         <p>ABOUT YOU</p>
         <p>ORDER HISTORY</p>
-        <button
+
+        <a
+          href="/api/logout"
           className="hover:cursor-pointer hover:underline"
-          onClick={handleLogout}
         >
           LOGOUT
-        </button>
+        </a>
       </div>
 
       <div className="flex-1">

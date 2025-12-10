@@ -13,6 +13,116 @@
  */
 
 // Source: schema.json
+export type ProductVariant = {
+  _id: string;
+  _type: "productVariant";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  seo?: Seo;
+  productTitle?: string;
+  variantTitle?: string;
+  productID?: number;
+  variantID?: number;
+  price?: number;
+  comparePrice?: number;
+  inStock?: boolean;
+  lowStock?: boolean;
+  sku?: string;
+  options?: Array<
+    {
+      _key: string;
+    } & ProductOptionValue
+  >;
+  isDraft?: boolean;
+  wasDeleted?: boolean;
+};
+
+export type Seo = {
+  _type: "seo";
+  metaTitle?: string;
+  metaDesc?: string;
+  shareTitle?: string;
+  shareDesc?: string;
+  shareGraphic?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type ProductGalleryPhotos = {
+  _type: "productGalleryPhotos";
+  forOption?: string;
+  photos?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    customRatio?: 0 | 1 | 0.7142857143 | 0.6666666667 | 1.7777777778;
+    alt?: string;
+    _type: "photo";
+    _key: string;
+  }>;
+};
+
+export type ProductOptionSettings = {
+  _type: "productOptionSettings";
+  forOption?: string;
+  color?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "solidColor";
+  };
+};
+
+export type SolidColor = {
+  _id: string;
+  _type: "solidColor";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  color?: Color;
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
+};
+
+export type ProductOptionValue = {
+  _type: "productOptionValue";
+  name?: string;
+  value?: string;
+  position?: number;
+};
+
+export type ProductOption = {
+  _type: "productOption";
+  name?: string;
+  position?: number;
+  values?: Array<string>;
+};
+
 export type Promo = {
   _id: string;
   _type: "promo";
@@ -57,15 +167,22 @@ export type BlockContent = Array<
     }
 >;
 
-export type Category = {
+export type Collection = {
   _id: string;
-  _type: "category";
+  _type: "collection";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
   slug?: Slug;
-  description?: string;
+  products?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "product";
+  }>;
+  seo?: Seo;
 };
 
 export type Slug = {
@@ -80,30 +197,36 @@ export type Product = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+  title?: string;
+  shopifyDescription?: string;
   description?: BlockContent;
+  optionSettings?: Array<
+    {
+      _key: string;
+    } & ProductOptionSettings
+  >;
+  seo?: Seo;
+  galleryPhotos?: Array<
+    {
+      _key: string;
+    } & ProductGalleryPhotos
+  >;
+  productTitle?: string;
+  productID?: number;
+  productImage?: string;
   price?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  stock?: number;
+  comparePrice?: number;
+  inStock?: boolean;
+  lowStock?: boolean;
+  sku?: string;
+  slug?: Slug;
+  options?: Array<
+    {
+      _key: string;
+    } & ProductOption
+  >;
+  isDraft?: boolean;
+  wasDeleted?: boolean;
 };
 
 export type SanityImageCrop = {
@@ -120,6 +243,30 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type RgbaColor = {
+  _type: "rgbaColor";
+  r?: number;
+  g?: number;
+  b?: number;
+  a?: number;
+};
+
+export type HsvaColor = {
+  _type: "hsvaColor";
+  h?: number;
+  s?: number;
+  v?: number;
+  a?: number;
+};
+
+export type HslaColor = {
+  _type: "hslaColor";
+  h?: number;
+  s?: number;
+  l?: number;
+  a?: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -219,13 +366,24 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | ProductVariant
+  | Seo
+  | ProductGalleryPhotos
+  | ProductOptionSettings
+  | SolidColor
+  | Color
+  | ProductOptionValue
+  | ProductOption
   | Promo
   | BlockContent
-  | Category
+  | Collection
   | Slug
   | Product
   | SanityImageCrop
   | SanityImageHotspot
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -246,120 +404,187 @@ export type ACTIVE_PROMO_BANNERResult = {
 // Source: ./src/sanity/lib/products/getAllCategories.ts
 // Variable: ALL_CATEGORIES_QUERY
 // Query: *[_type== "category"] | order(name asc)
-export type ALL_CATEGORIES_QUERYResult = Array<{
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  description?: string;
-}>;
+export type ALL_CATEGORIES_QUERYResult = Array<never>;
 
 // Source: ./src/sanity/lib/products/getAllProducts.ts
 // Variable: ALL_PRODUCTS_QUERY
-// Query: *[_type == "product"] | order(name asc)
+// Query: *[_type == "product" && !wasDeleted] | order(productTitle asc) {      ...,      optionSettings,      "optionSettingsResolved": optionSettings[]{        forOption,        "color": color->color      },     "variants": *[_type == "productVariant" && string(productID) == string(^.productID) ] {        ...,      }    }
 export type ALL_PRODUCTS_QUERYResult = Array<{
   _id: string;
   _type: "product";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+  title?: string;
+  shopifyDescription?: string;
   description?: BlockContent;
+  optionSettings: Array<
+    {
+      _key: string;
+    } & ProductOptionSettings
+  > | null;
+  seo?: Seo;
+  galleryPhotos?: Array<
+    {
+      _key: string;
+    } & ProductGalleryPhotos
+  >;
+  productTitle?: string;
+  productID?: number;
+  productImage?: string;
   price?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
+  comparePrice?: number;
+  inStock?: boolean;
+  lowStock?: boolean;
+  sku?: string;
+  slug?: Slug;
+  options?: Array<
+    {
+      _key: string;
+    } & ProductOption
+  >;
+  isDraft?: boolean;
+  wasDeleted?: boolean;
+  optionSettingsResolved: Array<{
+    forOption: string | null;
+    color: Color | null;
+  }> | null;
+  variants: Array<{
+    _id: string;
+    _type: "productVariant";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    seo?: Seo;
+    productTitle?: string;
+    variantTitle?: string;
+    productID?: number;
+    variantID?: number;
+    price?: number;
+    comparePrice?: number;
+    inStock?: boolean;
+    lowStock?: boolean;
+    sku?: string;
+    options?: Array<
+      {
+        _key: string;
+      } & ProductOptionValue
+    >;
+    isDraft?: boolean;
+    wasDeleted?: boolean;
   }>;
-  stock?: number;
 }>;
 
 // Source: ./src/sanity/lib/products/getProductBySlug.ts
 // Variable: PRODUCT_BY_ID_QUERY
-// Query: *[_type == "product" && slug.current == $slug] | order(name asc)[0]
+// Query: *[_type == "product" && slug.current == $slug] | order(name asc)[0]{      ...,      optionSettings,      "optionSettingsResolved": optionSettings[]{        forOption,        "color": color->color      },        "variants": *[_type == "productVariant" && string(productID) == string(^.productID) ] {        ...,      }  }
 export type PRODUCT_BY_ID_QUERYResult = {
   _id: string;
   _type: "product";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+  title?: string;
+  shopifyDescription?: string;
   description?: BlockContent;
+  optionSettings: Array<
+    {
+      _key: string;
+    } & ProductOptionSettings
+  > | null;
+  seo?: Seo;
+  galleryPhotos?: Array<
+    {
+      _key: string;
+    } & ProductGalleryPhotos
+  >;
+  productTitle?: string;
+  productID?: number;
+  productImage?: string;
   price?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
+  comparePrice?: number;
+  inStock?: boolean;
+  lowStock?: boolean;
+  sku?: string;
+  slug?: Slug;
+  options?: Array<
+    {
+      _key: string;
+    } & ProductOption
+  >;
+  isDraft?: boolean;
+  wasDeleted?: boolean;
+  optionSettingsResolved: Array<{
+    forOption: string | null;
+    color: Color | null;
+  }> | null;
+  variants: Array<{
+    _id: string;
+    _type: "productVariant";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    seo?: Seo;
+    productTitle?: string;
+    variantTitle?: string;
+    productID?: number;
+    variantID?: number;
+    price?: number;
+    comparePrice?: number;
+    inStock?: boolean;
+    lowStock?: boolean;
+    sku?: string;
+    options?: Array<
+      {
+        _key: string;
+      } & ProductOptionValue
+    >;
+    isDraft?: boolean;
+    wasDeleted?: boolean;
   }>;
-  stock?: number;
 } | null;
 
 // Source: ./src/sanity/lib/products/searchProductsByName.ts
 // Variable: PRODUCT_SEARCH_QUERY
-// Query: *[_type == "product" && name match $searchParam] | order(name asc)
+// Query: *[_type == "product" && productTitle match $searchParam] | order(productTitle asc)
 export type PRODUCT_SEARCH_QUERYResult = Array<{
   _id: string;
   _type: "product";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+  title?: string;
+  shopifyDescription?: string;
   description?: BlockContent;
+  optionSettings?: Array<
+    {
+      _key: string;
+    } & ProductOptionSettings
+  >;
+  seo?: Seo;
+  galleryPhotos?: Array<
+    {
+      _key: string;
+    } & ProductGalleryPhotos
+  >;
+  productTitle?: string;
+  productID?: number;
+  productImage?: string;
   price?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  stock?: number;
+  comparePrice?: number;
+  inStock?: boolean;
+  lowStock?: boolean;
+  sku?: string;
+  slug?: Slug;
+  options?: Array<
+    {
+      _key: string;
+    } & ProductOption
+  >;
+  isDraft?: boolean;
+  wasDeleted?: boolean;
 }>;
 
 // Query TypeMap
@@ -368,8 +593,8 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '\n            *[_type == "promo"][0]{\n                enabled,\n                text\n            }\n        ': ACTIVE_PROMO_BANNERResult;
     '*[_type== "category"] | order(name asc)': ALL_CATEGORIES_QUERYResult;
-    '*[_type == "product"] | order(name asc)': ALL_PRODUCTS_QUERYResult;
-    '\n    *[_type == "product" && slug.current == $slug] | order(name asc)[0]\n    ': PRODUCT_BY_ID_QUERYResult;
-    '*[_type == "product" && name match $searchParam] | order(name asc)': PRODUCT_SEARCH_QUERYResult;
+    '*[_type == "product" && !wasDeleted] | order(productTitle asc) {\n      ...,\n      optionSettings,\n      "optionSettingsResolved": optionSettings[]{\n        forOption,\n        "color": color->color\n      },\n     "variants": *[_type == "productVariant" && string(productID) == string(^.productID) ] {\n        ...,\n      }\n    }': ALL_PRODUCTS_QUERYResult;
+    '\n    *[_type == "product" && slug.current == $slug] | order(name asc)[0]{\n      ...,\n      optionSettings,\n      "optionSettingsResolved": optionSettings[]{\n        forOption,\n        "color": color->color\n      },\n        "variants": *[_type == "productVariant" && string(productID) == string(^.productID) ] {\n        ...,\n      }\n  }\n    ': PRODUCT_BY_ID_QUERYResult;
+    '*[_type == "product" && productTitle match $searchParam] | order(productTitle asc)': PRODUCT_SEARCH_QUERYResult;
   }
 }

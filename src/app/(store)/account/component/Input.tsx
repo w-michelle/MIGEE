@@ -7,6 +7,7 @@ interface InputProps {
   placeholder?: string;
   register: UseFormRegisterReturn;
   disabled?: boolean;
+  defaultValue: string;
 }
 
 export const Input = ({
@@ -16,6 +17,7 @@ export const Input = ({
   placeholder,
   register,
   disabled,
+  defaultValue,
 }: InputProps) => {
   return (
     <div>
@@ -25,6 +27,7 @@ export const Input = ({
         type={type}
         id={id}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         className={`outline-none text-sm border py-2 px-3 w-full rounded-sm mt-2
       ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
         disabled={disabled}

@@ -38,8 +38,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 
-    const { id, title, handle, status, variants, options, image, body_html } =
-      body;
+    const {
+      id,
+      title,
+      handle,
+      status,
+      variants,
+      options,
+      image,
+      images,
+      body_html,
+    } = body;
     console.log("the body", body);
     console.log(`Syncing product: "${title}" (ID: ${id})`);
 
@@ -52,17 +61,13 @@ export async function POST(request: NextRequest) {
 
     //product options if there is more than one variant
 
-    const productOptions =
-      variants.length > 1
-        ? options.map((option: any) => ({
-            _key: option.id,
-            _type: "productOption",
-            name: option.name,
-            values: option.values,
-            position: option.position,
-          }))
-        : [];
-
+    const productOptions = options.map((option: any) => ({
+      _key: option.id,
+      _type: "productOption",
+      name: option.name,
+      values: option.values,
+      position: option.position,
+    }));
     const productFields = {
       wasDeleted: false,
       isDraft: status === "draft" ? true : false,
@@ -123,18 +128,15 @@ export async function POST(request: NextRequest) {
             variant.inventory_quantity > 0 ||
             variant.inventory_policy === "continue",
           lowStock: variant.inventory_quantity <= 5,
-          options:
-            variants.length > 1
-              ? options.map(
-                  (option: { id: any; name: any; position: any }) => ({
-                    _key: option.id,
-                    _type: "productOptionValue",
-                    name: option.name,
-                    value: variant[`option${option.position}`],
-                    position: option.position,
-                  }),
-                )
-              : [],
+          options: options.map(
+            (option: { id: any; name: any; position: any }) => ({
+              _key: option.id,
+              _type: "productOptionValue",
+              name: option.name,
+              value: variant[`option${option.position}`],
+              position: option.position,
+            }),
+          ),
         }),
       );
 

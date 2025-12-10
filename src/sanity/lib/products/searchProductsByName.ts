@@ -3,7 +3,7 @@ import { sanityFetch } from "../live";
 
 export const searchProductsByName = async (searchParam: string) => {
   const PRODUCT_SEARCH_QUERY = defineQuery(
-    `*[_type == "product" && name match $searchParam] | order(name asc)`,
+    `*[_type == "product" && productTitle match $searchParam] | order(productTitle asc)`,
   );
 
   try {

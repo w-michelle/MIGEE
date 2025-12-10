@@ -4,7 +4,7 @@ import * as motion from "motion/react-client";
 import ProductThumb from "./ProductThumb";
 function ProductGrid({ products }: { products: Product[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5">
       {products?.map((product) => (
         <AnimatePresence key={product._id}>
           <motion.div
@@ -18,7 +18,6 @@ function ProductGrid({ products }: { products: Product[] }) {
           </motion.div>
         </AnimatePresence>
       ))}
-      product grid
     </div>
   );
 }

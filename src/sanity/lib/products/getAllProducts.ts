@@ -3,7 +3,17 @@ import { sanityFetch } from "../live";
 
 export const getAllProducts = async () => {
   const ALL_PRODUCTS_QUERY = defineQuery(
-    `*[_type == "product"] | order(name asc)`,
+    `*[_type == "product" && !wasDeleted] | order(productTitle asc) {
+      ...,
+      optionSettings,
+      "optionSettingsResolved": optionSettings[]{
+        forOption,
+        "color": color->color
+      },
+     "variants": *[_type == "productVariant" && string(productID) == string(^.productID) ] {
+        ...,
+      }
+    }`,
   );
 
   try {

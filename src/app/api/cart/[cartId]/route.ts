@@ -6,6 +6,10 @@ export async function GET(
   req: any,
   { params }: { params: { cartId: string } },
 ) {
-  const cart = await getShopifyCart(params.cartId);
+  const { cartId } = await params;
+  const decodedCartId = decodeURIComponent(cartId);
+  console.log("404 link cartId", decodedCartId);
+  const cart = await getShopifyCart(decodedCartId);
+
   return NextResponse.json(cart);
 }

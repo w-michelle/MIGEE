@@ -11,8 +11,8 @@ async function SearchPage({
 
   if (!products.length) {
     return (
-      <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4">
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
+      <div className="flex flex-col items-center justify-top min-h-screen p-4">
+        <div className="bg-white p-8 rounded-lg w-full max-w-4xl">
           <h1 className="text-3xl font-bold mb-6 text-center">
             No products found for: {query}
           </h1>
@@ -24,8 +24,8 @@ async function SearchPage({
     );
   }
   return (
-    <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
+    <div className="flex flex-col items-center justify-top min-h-screen p-4">
+      <div className="bg-white p-8 rounded-lg w-full max-w-4xl">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Search Results for {query}
         </h1>
