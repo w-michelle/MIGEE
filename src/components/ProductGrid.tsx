@@ -1,8 +1,8 @@
 import { AnimatePresence } from "motion/react";
 import { Product } from "../../sanity.types";
 import * as motion from "motion/react-client";
-import ProductThumb from "./ProductThumb";
-function ProductGrid({ products }: { products: Product[] }) {
+import ProductThumb, { ProductWithVariants } from "./ProductThumb";
+function ProductGrid({ products }: { products: ProductWithVariants[] }) {
   return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5">
       {products?.map((product) => (

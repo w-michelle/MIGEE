@@ -1,17 +1,30 @@
 import Link from "next/link";
-import { Product } from "../../sanity.types";
+import { Color, Product, ProductVariant } from "../../sanity.types";
 import Image from "next/image";
-import { imageUrl } from "@/lib/imageUrl";
-import { stripHtml } from "@/lib/stripHtml";
 import { formatPrice } from "@/lib/formatPrice";
 
-function ProductThumb({ product }: { product: Product }) {
+export type ProductWithVariants = Product & {
+  variants: ProductVariant[];
+  optionSettingsResolved?: Array<{
+    color: Color | null;
+    forOption: string | null;
+  }> | null;
+};
+
+function ProductThumb({ product }: { product: ProductWithVariants }) {
   const isOutOfStock = !product.inStock;
+
+  console.log("product variant from thumb", product.variants);
+
+  const url =
+    product.variants.length > 0
+      ? `/product/${product.slug?.current}?variant=${product.variants[0].variantID}`
+      : `/product/${product.slug?.current}`;
 
   return (
     <div className="w-full">
       <Link
-        href={`/product/${product.slug?.current}`}
+        href={url}
         className={`group w-full flex flex-col bg-white hover:shadow-md transition-all duration-200 overflow-hidden ${isOutOfStock ? "opacity-50" : ""}`}
       >
         <div className="relative aspect-square  overflow-hidden">

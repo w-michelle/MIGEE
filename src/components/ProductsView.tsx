@@ -1,8 +1,9 @@
 import { Category, Product } from "../../sanity.types";
 import ProductGrid from "./ProductGrid";
+import { ProductWithVariants } from "./ProductThumb";
 
 interface ProductsViewProps {
-  products: Product[];
+  products: ProductWithVariants[];
   categories: Category[];
 }
 

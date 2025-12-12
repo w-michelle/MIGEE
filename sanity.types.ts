@@ -204,7 +204,7 @@ export type Product = {
     {
       _key: string;
     } & ProductOptionSettings
-  >;
+  > | null;
   seo?: Seo;
   galleryPhotos?: Array<
     {
