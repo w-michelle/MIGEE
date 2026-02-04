@@ -1,23 +1,16 @@
-import { Category, Product } from "../../sanity.types";
 import ProductGrid from "./ProductGrid";
 import { ProductWithVariants } from "./ProductThumb";
 
 interface ProductsViewProps {
   products: ProductWithVariants[];
-  categories: Category[];
 }
 
-const ProductsView = ({ products, categories }: ProductsViewProps) => {
+const ProductsView = ({ products }: ProductsViewProps) => {
   return (
-    <div className="w-full border-pink-200">
-      {/* categories */}
-      <div className="w-full ">
-        {/* <CategorySelectorComponent categories /> */}
-      </div>
+    <div className="flex-1 w-full border-pink-200">
       {/* products */}
-      <div className="flex-1 w-full">
-        <ProductGrid products={products} />
-      </div>
+
+      <ProductGrid products={products} />
     </div>
   );
 };

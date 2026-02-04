@@ -40,15 +40,13 @@ const SignInView = () => {
     initialState,
   );
 
-  console.log("state data", state.data, state.issues);
-
   return (
-    <div className="p-8 rounded-lg">
+    <div className="p-8 flex-1 w-full ">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-xl font-bold">Welcome Back</h1>
         <p>Login to Your Account</p>
         <div className="text-center text-sm">
-          Dont&apos;t have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href="/account/register"
             className="underline underline-offset-4 hover:text-black"
@@ -82,7 +80,11 @@ const SignInView = () => {
             register={register("password")}
           />
           {state?.issues && (
-            <div className="text-red-500">
+            <div
+              className="text-red-500"
+              role="alert"
+              aria-live="assertive"
+            >
               <ul>
                 {state.issues.map((issue: string) => (
                   <li
@@ -100,7 +102,7 @@ const SignInView = () => {
           <button
             type="submit"
             disabled={pending}
-            className={`text-white w-full font-bold bg-amber-950 py-3 px-3 rounded-md hover:bg-neutral-900 hover:cursor-pointer`}
+            className={`text-white text-sm w-full font-bold bg-amber-950 py-3 px-3 rounded-md hover:bg-neutral-900 hover:cursor-pointer`}
           >
             SIGN IN
           </button>

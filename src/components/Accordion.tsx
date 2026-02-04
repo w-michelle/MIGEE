@@ -1,18 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import { useState } from "react";
 import { RxCaretDown, RxCaretUp } from "react-icons/rx";
 import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
-type PageProp = {
-  slug: string;
-  title: string;
-};
-const Accordion = ({ data, name }: { data: PageProp[]; name: string }) => {
+
+const Accordion = ({ data, name }: { data: any; name: string }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  if (!data.pages) {
+    return <div>hello</div>;
+  }
   return (
-    <li className="border-b px-6 py-6 text-gray-800">
+    <li className="border-b border-neutral-400 px-6 py-6 text-gray-800">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm">{name}</h3>
+        <h3 className="text-xs">{name}</h3>
         {isOpen ? (
           <motion.div
             onClick={() => setIsOpen(false)}
@@ -39,11 +41,21 @@ const Accordion = ({ data, name }: { data: PageProp[]; name: string }) => {
             className="overflow-hidden"
           >
             <ul className={`flex flex-col gap-3 mt-5 text-xs text-neutral-500`}>
-              {data.map((page: PageProp) => (
-                <li key={page.title}>
-                  <Link href={page.slug}>{page.title}</Link>
-                </li>
-              ))}
+              {data.title == "Follow"
+                ? data.pages.map((page: any) => (
+                    <li key={page.title}>
+                      <Link href={page.slug.current}>{page.title}</Link>
+                    </li>
+                  ))
+                : data.pages.map((page: any) => (
+                    <li key={page.title}>
+                      <Link
+                        href={`/${name.toLowerCase()}/${page.slug.current}`}
+                      >
+                        {page.title}
+                      </Link>
+                    </li>
+                  ))}
             </ul>
           </motion.div>
         )}

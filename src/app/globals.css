@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-
+@import "vanilla-cookieconsent/dist/cookieconsent.css";
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -14,3 +14,16 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* @keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade {
+  animation: fade 0.5s ease-in-out;
+} */

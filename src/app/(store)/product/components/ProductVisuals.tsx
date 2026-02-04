@@ -15,7 +15,7 @@ function ProductVisuals({ activeVariant, gallery }: ProductVisualProps) {
   //get container height
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  console.log("gallery", gallery);
+
   const findGallery = gallery?.find((item) => {
     if (!item.forOption) return null;
     const colorValue = item.forOption.split(":")[1];
@@ -36,21 +36,7 @@ function ProductVisuals({ activeVariant, gallery }: ProductVisualProps) {
     const index = Math.round(scrollTop / containerHeight);
     setActiveIndex(index);
   };
-  {
-    /* <div
-          className={`relative aspect-square overflow-hidden rounded-lg shadow-lg ${isOutOfStock ? "opacity-50" : ""}`}
-        > */
-  }
-  {
-    /* {product.productImage && (
-            <Image
-              src={product.productImage}
-              alt={product.productTitle || "Product image"}
-              fill
-              className="object-cover transition-transform duration-300 hover:scale-105"
-            />
-          )} */
-  }
+
   return (
     <div className="relative">
       <div

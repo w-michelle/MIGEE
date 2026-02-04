@@ -1,4 +1,5 @@
 import ProductPreviewMedia from "@/components/productPreviewMedia";
+import SurfaceOptionSelector from "@/sanity/components/SurfaceOption";
 
 import { TrolleyIcon } from "@sanity/icons";
 import { BsCloudArrowDown } from "react-icons/bs";
@@ -20,6 +21,10 @@ export const product = defineType({
       title: "",
       name: "2up",
       options: { columns: 2 },
+    },
+    {
+      title: "Product Cards",
+      name: "cards",
     },
   ],
   fields: [
@@ -57,7 +62,6 @@ export const product = defineType({
       type: "seo",
       group: "settings",
     }),
-
     defineField({
       title: "Gallery",
       name: "galleryPhotos",
@@ -178,7 +182,7 @@ export const product = defineType({
     },
     prepare({ productTitle, subtitle, media, slug }) {
       const slugValue = slug?.current || "missing-slug";
-      const path = `/products/${slugValue}`;
+      const path = `/product/${slugValue}`;
 
       return {
         title: productTitle,

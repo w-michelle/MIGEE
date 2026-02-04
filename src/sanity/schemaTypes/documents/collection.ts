@@ -79,7 +79,7 @@ export const collection = defineType({
       slug: "slug",
     },
     prepare({ title = "Untitled", slug = {} }) {
-      const path = `/shop/${slug.current}`;
+      const path = `/${slug.current}`;
       return {
         title,
         subtitle: slug.current ? path : "(missing slug)",

@@ -4,16 +4,6 @@ import { redirect } from "next/navigation";
 
 import AccountView from "./component/account-view";
 
-// orders(first: 20) {
-//     edges {
-//         node {
-//             name
-//             processedAt
-//             totalPriceSet { shopMoney {amount currencyCode } }
-//         }
-//     }
-// }
-
 const CUSTOMER_QUERY = `
 query getCustomer($token: String!) {
     customer(customerAccessToken: $token) {
@@ -41,11 +31,10 @@ export default async function AccountPage() {
   if (!customer) {
     redirect("/account/login");
   }
-  console.log("customer", customer);
 
   return (
-    <div>
+    <main className="w-full ">
       <AccountView customer={customer} />
-    </div>
+    </main>
   );
 }

@@ -22,6 +22,13 @@ export const variants = defineType({
       group: "content",
     }),
     defineField({
+      name: "product",
+      title: "Product",
+      type: "reference",
+      to: [{ type: "product" }],
+      readOnly: true,
+    }),
+    defineField({
       title: "SEO / Share Settings",
       name: "seo",
       type: "seo",

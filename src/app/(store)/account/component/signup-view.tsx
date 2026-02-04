@@ -46,7 +46,7 @@ const SignUpView = () => {
   );
 
   return (
-    <div className="p-8 rounded-lg">
+    <div className="w-full p-8">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-xl font-bold">NEW HERE?</h1>
         <p>Create and account to save your purchase information</p>
@@ -99,7 +99,11 @@ const SignUpView = () => {
             register={register("password")}
           />
           {state?.issues && (
-            <div className="text-red-500">
+            <div
+              className="text-red-500"
+              role="alert"
+              aria-live="assertive"
+            >
               <ul>
                 {state.issues.map((issue: string) => (
                   <li
@@ -113,7 +117,11 @@ const SignUpView = () => {
               </ul>
             </div>
           )}
-          <div className="flex items-center gap-2 justify-center w-full border-1">
+          <div className="flex items-center gap-2 justify-center w-full">
+            <label
+              htmlFor="acceptsMarketing"
+              className="sr-only"
+            ></label>
             <input
               {...register("acceptsMarketing", {
                 setValueAs: (v) => Boolean(v),
@@ -130,7 +138,7 @@ const SignUpView = () => {
           <button
             type="submit"
             disabled={isPending}
-            className={`text-white w-full font-bold bg-amber-950 py-3 px-3 rounded-md hover:bg-neutral-900 hover:cursor-pointer`}
+            className={`text-white text-sm w-full font-bold bg-amber-950 py-3 px-3 rounded-md hover:bg-neutral-900 hover:cursor-pointer`}
           >
             REGISTER
           </button>

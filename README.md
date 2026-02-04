@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+<img src="public/migee.png" align="center" height="100" />
+</p>
 
-## Getting Started
+<p align="center">
+<strong>Headless Shopify built with Next.js</strong><br/>
+<strong>Headless CMS powered by Sanity.io</strong>
+</p>
 
-First, run the development server:
+<h3 align="center">
+<a href="">View Site </a>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+</h3>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+While trying to launch an ecommerce store using Shopify alone, I found the default theme system limiting and unintuitive. From a client perspective, it felt restrictive when trying to build unique, content-driven brand experiences.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project uses a headless approach — Shopify + Sanity + Next.js to solve that problem. Sanity serves as the content and data hub, giving teams control over content and structured data across different brand touchpoints. Shopify manages products, inventory, and checkout, while Next.js powers the frontned experience.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Together, this setup creates a more flexible worflow that aligns developers, designers, and marketers around a scalable system.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- Automatically sync products from Shopify to Sanity
+- Customer sign up / sign in using storefront api
+- Cart persisted and synced with Shopify across sessions
+- Real-time inventory check for products using SWR
+- Dynamic Page Routes for custom page create
+- Klaviyo for newsletter
+- Animations by Framer Motion
+- Customizable Promotion Banner
+- Modular page content
+- Custom collection pages
+- Search bar for products
+- SEO features:
+  - Page-level SEO/Share settings with previews
+  - Fallback Global SEO/Share settings
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Built With
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js
+- Typescript
+- Sanity
+- Shopify (Storefront API)
+- TailwindCSS
+- Framer Motion
+- Zustand
+- SWR
+- Drizzle ORM
+- PostgreSQL

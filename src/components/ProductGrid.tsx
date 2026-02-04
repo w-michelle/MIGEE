@@ -1,13 +1,13 @@
 import { AnimatePresence } from "motion/react";
-import { Product } from "../../sanity.types";
 import * as motion from "motion/react-client";
 import ProductThumb, { ProductWithVariants } from "./ProductThumb";
 function ProductGrid({ products }: { products: ProductWithVariants[] }) {
   return (
-    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5">
-      {products?.map((product) => (
-        <AnimatePresence key={product._id}>
-          <motion.div
+    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6">
+      <AnimatePresence>
+        {products?.map((product) => (
+          <motion.li
+            key={product._id}
             layout
             initial={{ opacity: 0.2 }}
             animate={{ opacity: 1 }}
@@ -15,10 +15,10 @@ function ProductGrid({ products }: { products: ProductWithVariants[] }) {
             className="flex justify-center"
           >
             <ProductThumb product={product} />
-          </motion.div>
-        </AnimatePresence>
-      ))}
-    </div>
+          </motion.li>
+        ))}
+      </AnimatePresence>
+    </ul>
   );
 }
 

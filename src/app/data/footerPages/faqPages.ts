@@ -1,14 +1,14 @@
 export const faqPages = [
   {
-    slug: "shipping-informations",
-    title: "Shipping Informations",
+    href: "/shipping-informations",
+    label: "Shipping Informations",
   },
   {
-    slug: "returns-and-exchanges",
-    title: "Returns & Exchanges",
+    href: "/returns-and-exchanges",
+    label: "Returns & Exchanges",
   },
   {
-    slug: "payments",
-    title: "Payments",
+    href: "/payments",
+    label: "Payments",
   },
 ];

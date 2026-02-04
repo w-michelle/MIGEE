@@ -9,7 +9,7 @@ const sanity = createClient({
   useCdn: false,
 });
 
-export default async function POST(request: Request) {
+export async function POST(request: Request) {
   try {
     const rawBody = await request.text();
 
@@ -56,6 +56,9 @@ export default async function POST(request: Request) {
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.error("Webhook error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

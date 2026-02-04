@@ -23,10 +23,11 @@ export const CART_QUERY = `
                             ... on ProductVariant {
                                 id
                                 title
-                                availableForSale
+                                
 
                                 product {
                                     title
+                                    handle
                                 }
                                 
                                 image {
@@ -50,59 +51,6 @@ export const CART_QUERY = `
 
 `;
 
-// // //get customer to fetch their active cart
-// export const GET_CUSTOMER_CART = `
-//     query GetCustomerCart($customerAccessToken: String!) {
-//         customer(customerAccessToken: $customerAccessToken) {
-//             id
-//             cart {
-//                 id
-//                 cost {
-//                     subtotalAmount {
-//                         amount
-//                     }
-//                 }
-//                 lines(first: 50) {
-//                     edges {
-//                         node {
-//                             id
-//                             quantity
-//                             merchandise {
-//                                 ... on ProductVariant {
-//                                     id
-//                                 }
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// `;
-// export const GET_CUSTOMER = `
-
-//     query getCustomer($customerAccessToken: String!) {
-//     customer(customerAccessToken: $customerAccessToken) {
-//         lastIncompleteCheckout {
-//             id
-//             lineItems(first: 50) {
-//                 edges {
-//                     node {
-//                         id
-//                         quantity
-//                         title
-//                         variant {
-//                             id
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-// }
-// `;
-
 //cart creation
 export const CREATE_CART_MUTATION = `
     mutation CreateCart {
@@ -120,7 +68,7 @@ export const CREATE_CART_MUTATION = `
 
 export const ADD_TO_CART_MUTATION = `
     mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!) {
-        cartLinesAdd(cartId: $cartId, lines: $line) {
+        cartLinesAdd(cartId: $cartId, lines: $lines) {
             cart {
                 id
             }
@@ -165,5 +113,72 @@ export const CART_BUYER_IDENTITY_UPDATE = `
                 message
             }
         }
+    }
+`;
+
+export const imageMeta = `
+    asset->{
+        _id,
+        url,
+        metadata {
+            dimensions{
+                width,
+                height
+            },
+            lqip
+        }
+    }
+
+`;
+
+export const HOME_PAGE_QUERY = `
+    *[_type == "page" && slug.current == "home"][0]{
+        title,
+        hasTransparentHeader,
+        modules[]{
+            ...,
+            items[]{
+                ...,
+                _type == "product" => @->{
+                    _id,
+                    productID,
+                    productTitle,
+                    "slug": slug.current,
+                    productImage,
+                    price,
+                    "defaultVariant": *[_type == "productVariant" && string(productID) == string(^.productID)][0] {
+                        variantID,
+                         title,
+                        price,
+                     },
+                }
+            },
+            media[] {
+                _key,
+                mediaType,
+                image{
+                ...,
+                alt,
+                customRatio,
+                ${imageMeta}
+            },
+                video{
+                asset->{
+                url
+                }
+            }
+            },
+            photos[]{
+                ...,
+                alt,
+                customRatio,
+                ${imageMeta}
+            },
+      
+            _type == "reference" => @->{
+                ...
+            }
+        },
+        seo
     }
 `;

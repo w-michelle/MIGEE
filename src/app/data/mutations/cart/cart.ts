@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { shopifyFetch } from "@/lib/shopify";
-import { revalidatePath } from "next/cache";
+
 import {
   ADD_TO_CART_MUTATION,
   CART_BUYER_IDENTITY_UPDATE,
@@ -14,17 +14,16 @@ import { user } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 type CartProps = {
-  cartId: string;
-  merchandiseId: string;
+  cartId: string | null;
+  productID?: number;
   lineId?: string;
   quantity?: number;
 };
 
 export async function getShopifyCart(cartId: string) {
   try {
-    console.log("getshopify cart ID", cartId);
     const data = await shopifyFetch(CART_QUERY, { cartId });
-    console.log("is data found in getshopify cart", data);
+
     return data.data.cart;
   } catch (error) {
     return null;
@@ -35,24 +34,27 @@ export async function getCustomerCart(email: string) {
   //change it to query from DB
 
   const data = await db.select().from(user).where(eq(user.email, email));
-  console.log("returned from db", data);
+
   return data;
 }
 
 export async function createShopifyCart() {
   const data = await shopifyFetch(CREATE_CART_MUTATION);
-  console.log("cart created:", data.data.cartCreate.cart);
+
   return data.data.cartCreate.cart;
 }
 
 export async function addToCart({
   cartId,
-  merchandiseId,
+  productID,
   quantity = 1,
 }: CartProps) {
+  if (!cartId) return;
+
+  const productGID = `gid://shopify/ProductVariant/${productID}`;
   return shopifyFetch(ADD_TO_CART_MUTATION, {
     cartId,
-    lines: [{ merchandiseId, quantity }],
+    lines: [{ merchandiseId: productGID, quantity }],
   });
 }
 
@@ -80,8 +82,6 @@ export async function attachCartToCustomer(
       customerAccessToken,
     },
   });
-
-  console.log("attachCartToCustomer raw:", JSON.stringify(res, null, 2));
 
   const update = res?.data?.cartBuyerIdentityUpdate;
   if (update?.userErrors?.length) {

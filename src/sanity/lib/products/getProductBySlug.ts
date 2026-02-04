@@ -1,18 +1,32 @@
 import { sanityFetch } from "../live";
 import { defineQuery } from "next-sanity";
+import { sanityFetchStatic } from "../sanityFetchStatic";
 
 export const getProductBySlug = async (slug: string) => {
   const PRODUCT_BY_ID_QUERY = defineQuery(`
     *[_type == "product" && slug.current == $slug] | order(name asc)[0]{
       ...,
       optionSettings,
+      seo {
+        metaTitle,
+        metaDesc,
+        shareTitle,
+        shareDesc,
+        shareGraphic {
+          asset->{
+            _id,
+            url
+          }
+        }
+      },
       "optionSettingsResolved": optionSettings[]{
         forOption,
         "color": color->color
       },
-        "variants": *[_type == "productVariant" && string(productID) == string(^.productID) ] {
+        "variants": *[_type == "productVariant" && string(productID) == string(^.productID) && wasDeleted != true ] {
         ...,
-      }
+      },
+   
   }
     `);
 
@@ -23,6 +37,7 @@ export const getProductBySlug = async (slug: string) => {
         slug,
       },
     });
+
     return product.data || null;
   } catch (error) {
     console.error("Error fetching product by ID:", error);

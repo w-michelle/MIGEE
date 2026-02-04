@@ -10,10 +10,25 @@ import { productOptionSettings } from "./objects/product-option-settings";
 import { variants } from "./documents/variants";
 import { productGallery } from "./objects/product-gallery-photos";
 import { productOptionValue } from "./objects/product-option-value";
+import { dividerPhoto } from "./modules/divider-photo";
+import { marquee } from "./modules/marquee";
+import { section } from "./documents/section";
+import { Hero } from "./modules/hero";
+import { page } from "./documents/page";
+import { dividerMediaItem } from "./objects/dividerMediaItem";
+import { footerSection } from "./documents/footer-section";
+import { infoPage } from "./objects/info-page";
+import { infoBlock } from "./objects/info-block";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     product,
+    page,
+    Hero,
+    section,
+    marquee,
+    dividerPhoto,
+    dividerMediaItem,
     collection,
     blockContent,
     promo,
@@ -24,5 +39,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     productGallery,
     color,
     variants,
+    footerSection,
+    infoBlock,
+    infoPage,
   ],
 };

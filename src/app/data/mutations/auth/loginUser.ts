@@ -47,7 +47,6 @@ export default async function loginUser(
   initialState: FormState,
   formData: FormData,
 ) {
-  console.log("formData", formData);
   const parse = schema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -69,18 +68,11 @@ export default async function loginUser(
   const response = await shopifyFetch(LOGIN_MUTATION, {
     input: { email: data.email, password: data.password },
   });
-  console.log("data is parsed", data);
-  console.log("response data", response.data);
-  console.log(
-    "response error",
-    response.data.customerAccessTokenCreate.customerUserErrors,
-  );
 
   const errors = response?.data.customerAccessTokenCreate?.customerUserErrors;
   const token =
     response?.data.customerAccessTokenCreate?.customerAccessToken?.accessToken;
 
-  console.log("what are the errors:", errors);
   if (errors?.length > 0) {
     return {
       message: "User cannot be found",
@@ -88,8 +80,6 @@ export default async function loginUser(
       data: data,
     };
   }
-
-  console.log("token", token);
 
   await setAuthToken(token);
 

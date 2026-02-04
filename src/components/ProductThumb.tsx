@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import Link from "next/link";
 import { Color, Product, ProductVariant } from "../../sanity.types";
 import Image from "next/image";
 import { formatPrice } from "@/lib/formatPrice";
+import { useState } from "react";
 
 export type ProductWithVariants = Product & {
   variants: ProductVariant[];
@@ -12,17 +15,19 @@ export type ProductWithVariants = Product & {
 };
 
 function ProductThumb({ product }: { product: ProductWithVariants }) {
+  const { variants, optionSettingsResolved } = product;
+
+  const [hovered, setHovered] = useState(false);
+
   const isOutOfStock = !product.inStock;
 
-  console.log("product variant from thumb", product.variants);
-
   const url =
-    product.variants.length > 0
+    product.variants?.length > 0
       ? `/product/${product.slug?.current}?variant=${product.variants[0].variantID}`
       : `/product/${product.slug?.current}`;
 
   return (
-    <div className="w-full">
+    <article className="w-full">
       <Link
         href={url}
         className={`group w-full flex flex-col bg-white hover:shadow-md transition-all duration-200 overflow-hidden ${isOutOfStock ? "opacity-50" : ""}`}
@@ -43,16 +48,52 @@ function ProductThumb({ product }: { product: ProductWithVariants }) {
             </div>
           )}
         </div>
-        <div className="p-4 border ">
-          <h2 className="text-sm text-gray-800 truncate">
+        <div className="p-3">
+          <h2 className="text-xs text-gray-800 truncate">
             {product.productTitle}
           </h2>
-          <p className="mt-2 text-sm text-neutral-400 ">
-            {formatPrice(product.price!)}
+          <p className="mt-2 text-xs text-neutral-400 ">
+            {formatPrice(product.price!)} CAD
           </p>
         </div>
       </Link>
-    </div>
+      <div
+        className="px-3"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {!hovered ? (
+          <span className="text-xs cursor-pointer text-neutral-500 hover:text-gray-400">
+            {variants.length > 1 ? `${variants.length} colors` : ""}
+          </span>
+        ) : (
+          <ul className="flex items-center gap-2">
+            {variants &&
+              variants.map((item, key) => {
+                const optColor = optionSettingsResolved?.find((settings) => {
+                  if (!settings.forOption) return null;
+                  const optColorValue = settings.forOption.split(":")[1];
+                  return optColorValue === item.variantTitle;
+                });
+                if (!optColor?.color?.hex) return null;
+                return (
+                  <li
+                    key={key}
+                    className={`rounded-full`}
+                  >
+                    <div className="py-1 relative">
+                      <div
+                        className="relative w-3 h-3 rounded-full"
+                        style={{ backgroundColor: optColor.color.hex }}
+                      ></div>
+                    </div>
+                  </li>
+                );
+              })}
+          </ul>
+        )}
+      </div>
+    </article>
   );
 }
 

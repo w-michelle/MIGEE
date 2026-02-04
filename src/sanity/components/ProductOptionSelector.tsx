@@ -33,7 +33,9 @@ export default function OptionSelector(props: any) {
     <Stack space={3}>
       <Select
         value={value || ""}
-        onChange={(e) => onChange(PatchEvent.from(set(e.target.value)))}
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+          onChange(PatchEvent.from(set(e.target.value)))
+        }
       >
         {dynamicOptions.map((opt) => (
           <option
@@ -47,11 +49,3 @@ export default function OptionSelector(props: any) {
     </Stack>
   );
 }
-
-//   const parsed = options.map((opt) => {
-//     return {
-//       title: opt?.name,
-//       values: opt?.values?.join(", "),
-//       value: `${opt?.name}:${opt?.values?.join(",")}`,
-//     };
-//   });

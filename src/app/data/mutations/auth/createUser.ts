@@ -48,8 +48,6 @@ export default async function createUser(
       formData.get("acceptsMarketing") === "true",
   });
 
-  console.log("formData", formData);
-
   if (!parse.success) {
     return {
       message: "Invalid form data",
@@ -69,11 +67,8 @@ export default async function createUser(
     },
   });
 
-  console.log("data is parsed", data);
-  console.log("what is response", response.data.customerCreate.customer);
-
   const errors = response?.data.customerCreate?.customerUserErrors;
-  console.log("what are the errors:", errors);
+
   if (errors?.length > 0) {
     return {
       message: "Account cannot be created at this time",

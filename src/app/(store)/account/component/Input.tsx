@@ -7,7 +7,7 @@ interface InputProps {
   placeholder?: string;
   register: UseFormRegisterReturn;
   disabled?: boolean;
-  defaultValue: string;
+  defaultValue?: string;
 }
 
 export const Input = ({
@@ -21,7 +21,12 @@ export const Input = ({
 }: InputProps) => {
   return (
     <div>
-      <label className="text-sm">{label}</label>
+      <label
+        htmlFor={id}
+        className="text-sm"
+      >
+        {label}
+      </label>
       <input
         {...register}
         type={type}

@@ -9,9 +9,9 @@ async function Login() {
     redirect("/account");
   }
   return (
-    <div className="w-full md:w-1/2 mt-6 mx-auto">
+    <main className="w-full md:w-1/2 mt-6 mx-auto">
       <SignInView />
-    </div>
+    </main>
   );
 }
 
