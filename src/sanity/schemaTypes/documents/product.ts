@@ -1,5 +1,4 @@
 import ProductPreviewMedia from "@/components/productPreviewMedia";
-import SurfaceOptionSelector from "@/sanity/components/SurfaceOption";
 
 import { TrolleyIcon } from "@sanity/icons";
 import { BsCloudArrowDown } from "react-icons/bs";
