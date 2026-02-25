@@ -59,7 +59,7 @@ export const FooterContent = ({ pages }: FooterContentProps) => {
         ))}
       </ul>
       <div className="text-xs px-6 py-4 flex gap-4 border-t border-neutral-400">
-        <small>© MIGEE 2025</small>
+        <small>© MIGEE 2026</small>
       </div>
     </section>
   );

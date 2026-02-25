@@ -8,13 +8,13 @@
 </p>
 
 <h3 align="center">
-<a href="">View Site </a>
+<a href="https://migee.vercel.app">View Site </a>
 
 </h3>
 
-While trying to launch an ecommerce store using Shopify alone, I found the default theme system limiting and unintuitive. From a client perspective, it felt restrictive when trying to build unique, content-driven brand experiences.
+While trying to launch an ecommerce store using Shopify, I found the default theme system limiting and unintuitive. From a client perspective, it felt restrictive when trying to build unique, content-driven brand experiences.
 
-This project uses a headless approach — Shopify + Sanity + Next.js to solve that problem. Sanity serves as the content and data hub, giving teams control over content and structured data across different brand touchpoints. Shopify manages products, inventory, and checkout, while Next.js powers the frontned experience.
+This project uses a headless approach — Shopify + Sanity + Next.js to solve that problem. Sanity serves as the content and data hub, giving teams control over content. Meanwhile Shopify manages products, inventory, and checkout, and Next.js powers the frontend experience.
 
 Together, this setup creates a more flexible worflow that aligns developers, designers, and marketers around a scalable system.
 
@@ -47,3 +47,17 @@ Together, this setup creates a more flexible worflow that aligns developers, des
 - SWR
 - Drizzle ORM
 - PostgreSQL
+
+## At a Glance
+
+|       Homepage        |
+| :-------------------: |
+| ![](/public/mg-1.png) |
+
+|     Category Page     |
+| :-------------------: |
+| ![](/public/mg-2.png) |
+
+|     Shopping Cart     |
+| :-------------------: |
+| ![](/public/mg-3.png) |
