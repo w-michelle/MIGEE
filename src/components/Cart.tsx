@@ -107,11 +107,11 @@ const Cart = () => {
 
   return (
     <div
-      className="z-99 h-full"
+      className="z-99 fixed"
       role="dialog"
       aria-modal="true"
     >
-      <motion.div className="absolute h-full w-full inset-0 bg-white/75 transition-opacity duration-500 ease-in-out ">
+      <motion.div className="fixed inset-0 bg-white/75 transition-opacity duration-500 ease-in-out ">
         <AnimatePresence>
           {isCartOpen && (
             <motion.div
@@ -119,7 +119,7 @@ const Cart = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.8 }}
-              className="ml-auto border-l border-neutral-300 bg-white w-full md:max-w-md h-full "
+              className="ml-auto border-l border-neutral-300 bg-white w-full md:max-w-md h-dvh"
             >
               <div className="p-6 h-full flex flex-col">
                 <div className="flex items-start justify-between">

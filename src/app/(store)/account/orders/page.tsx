@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default async function OrdersPage() {
   const allOrders = await getCustomerOrders();
-  console.log("all orders", allOrders);
+
   return (
     <section className="w-full px-6 py-8 text-sm">
       <div className="grid grid-cols-5 font-semibold border-b pb-2">
