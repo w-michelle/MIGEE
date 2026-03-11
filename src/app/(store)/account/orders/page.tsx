@@ -1,10 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import getCustomerOrders from "@/app/data/order/order";
 import { formatOrderDate } from "@/lib/formatDate";
+import { HiArrowSmRight } from "react-icons/hi";
 import Link from "next/link";
 
 export default async function OrdersPage() {
   const allOrders = await getCustomerOrders();
+
+  if (allOrders.orders.length === 0) {
+    return (
+      <div className=" flex flex-col mt-20 w-full">
+        <h1>You haven&apos;t placed any orders yet.</h1>
+        <Link
+          href="/collections/handbags"
+          className="flex items-center my-6 text-sm hover:font-bold"
+        >
+          Start Shopping <HiArrowSmRight size={20} />
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <section className="w-full px-6 py-8 text-sm">

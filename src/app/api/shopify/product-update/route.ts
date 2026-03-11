@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       images,
       body_html,
     } = body;
-    console.log("the body", body);
+
     console.log(`Syncing product: "${title}" (ID: ${id})`);
 
     //define product document
@@ -281,7 +281,6 @@ export async function POST(request: NextRequest) {
     const result = await stx.commit();
 
     console.info("Sync complete!");
-    console.log(result);
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {

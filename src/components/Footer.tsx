@@ -15,8 +15,6 @@ export const Footer = async () => {
         }`;
   const pages = await sanityFetchStatic({ query: FOOTER_QUERY });
 
-  console.log("footer", pages);
-
   return (
     <footer className="mt-auto">
       <FooterReassurance />

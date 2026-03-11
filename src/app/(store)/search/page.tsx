@@ -11,8 +11,8 @@ async function SearchPage({
 
   if (!products.length) {
     return (
-      <div className="flex flex-col items-center justify-top min-h-screen p-4">
-        <div className="bg-white p-8 rounded-lg w-full max-w-4xl">
+      <div className="flex flex-col items-center justify-top min-h-screen p-2">
+        <div className="bg-white p-2 rounded-lg w-full max-w-4xl">
           <h1 className="text-md font-bold mb-6 text-center">
             No products found for: {query}
           </h1>
@@ -24,10 +24,10 @@ async function SearchPage({
     );
   }
   return (
-    <div className="flex flex-col items-center justify-top min-h-screen p-4">
-      <div className="bg-white p-8 rounded-lg w-full max-w-4xl">
+    <div className="flex flex-col items-center justify-top min-h-screen p-2">
+      <div className="bg-white p-2 rounded-lg w-full max-w-4xl">
         <h1 className="text-md font-bold mb-6 text-center">
-          Search Results for {query}
+          SHOWING SEARCH RESULTS FOR &quot;{query}&quot;
         </h1>
         <ProductGrid products={products} />
       </div>

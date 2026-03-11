@@ -101,8 +101,8 @@ const SignInView = () => {
 
           <button
             type="submit"
-            disabled={pending}
-            className={`text-white text-sm w-full font-bold bg-amber-950 py-3 px-3 rounded-md hover:bg-neutral-900 hover:cursor-pointer`}
+            disabled={isPending}
+            className={`disabled:cursor-not-allowed disabled:bg-neutral-400 text-white text-sm w-full font-bold bg-amber-950 py-3 px-3 rounded-md hover:bg-neutral-900 hover:cursor-pointer`}
           >
             SIGN IN
           </button>

@@ -16,7 +16,6 @@ async function OrderDetails({
   }
 
   const order = await getSingleOrder(orderNo);
-  console.log("SINGLE ORDER", order);
 
   return (
     <div className="w-full text-xs space-y-4 px-6 py-8">
