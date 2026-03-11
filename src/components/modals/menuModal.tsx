@@ -52,7 +52,7 @@ const MenuModal = ({ collections }: { collections: Collection[] }) => {
       role="dialog"
       aria-modal="true"
       aria-label="Mobile menu"
-      className="absolute text-neutral-700 inset-0 w-full h-screen overflow-hidden bg-white z-100"
+      className="fixed text-neutral-700 inset-0 w-full h-dvh  bg-white z-100"
     >
       <div className="h-full flex flex-col">
         <header className="flex justify-between px-4 py-4">
@@ -79,7 +79,7 @@ const MenuModal = ({ collections }: { collections: Collection[] }) => {
           </button>
         </header>
 
-        <div className="flex flex-col h-full mt-8">
+        <div className="flex flex-col flex-1 mt-8">
           <div className="flex items-center mx-4 border-b mb-6">
             <CiSearch size={18} />
             <form
@@ -110,7 +110,7 @@ const MenuModal = ({ collections }: { collections: Collection[] }) => {
                   key={item._id}
                   className="border-b border-gray-300 p-4 w-full"
                 >
-                  <Link href={`/${item.slug}`}>{item.title}</Link>
+                  <Link href={`/collections/${item.slug}`}>{item.title}</Link>
                 </li>
               ))}
             </ul>
