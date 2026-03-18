@@ -151,7 +151,9 @@ const Cart = () => {
                         >
                           <div className="relative size-32">
                             <Image
-                              src={item.node.merchandise.image.url}
+                              src={
+                                item.node.merchandise.image?.url || "/migee.png"
+                              }
                               alt={item.node.merchandise.product.title}
                               fill
                               className="object-cover"

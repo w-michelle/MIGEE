@@ -8,7 +8,7 @@
 </p>
 
 <h3 align="center">
-<a href="https://migee.vercel.app">View Site </a>
+<a href="https://migee.co">View Site </a>
 
 </h3>
 
