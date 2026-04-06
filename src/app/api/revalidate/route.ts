@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
       const message = "Bad Request";
       return new Response(JSON.stringify({ message, body }), { status: 400 });
     }
-    console.log("sanity webhook body path", body.paths);
 
     body.paths.forEach((p) => {
       revalidatePath(p);

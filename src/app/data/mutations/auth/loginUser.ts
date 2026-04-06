@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { custom, z } from "zod";
 import { cookies } from "next/headers";
-import { attachCartToCustomer, getCustomerCart } from "../cart/cart";
+import { attachCartToCustomer, getCustomer } from "../cart/cart";
 import { db } from "@/db";
 import { user } from "@/db/schema";
 
@@ -88,7 +88,7 @@ export default async function loginUser(
   const cartId = cookieStore.get("cartId")?.value || null;
 
   // check if customer has cart set to cookie
-  const existingCustomer = await getCustomerCart(data.email);
+  const existingCustomer = await getCustomer(data.email);
 
   if (existingCustomer[0].cartId) {
     cookieStore.set("cartId", existingCustomer[0].cartId, { path: "/" });

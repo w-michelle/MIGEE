@@ -1,30 +1,10 @@
-import { getAuthToken } from "@/lib/cookies";
-import { shopifyFetch } from "@/lib/shopify";
 import { redirect } from "next/navigation";
 
 import AccountView from "./component/account-view";
-
-const CUSTOMER_QUERY = `
-query getCustomer($token: String!) {
-    customer(customerAccessToken: $token) {
-        email
-        firstName
-        lastName
-       
-    }
-}
-`;
+import { getCustomerProfile } from "@/app/data/order/getCustomerProfile";
 
 export default async function AccountPage() {
-  const token = await getAuthToken();
-
-  if (!token) {
-    redirect("/account/login");
-  }
-
-  const { data } = await shopifyFetch(CUSTOMER_QUERY, {
-    token,
-  });
+  const data = await getCustomerProfile();
 
   const customer = data?.customer;
 

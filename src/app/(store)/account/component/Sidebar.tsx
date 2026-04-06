@@ -8,7 +8,6 @@ export function Sidebar() {
   const navItems = [
     { href: "/account", label: "About You" },
     { href: "/account/orders", label: "Order History" },
-    { href: "/api/logout", label: "Logout" },
   ];
   return (
     <aside className="md:w-64 text-xs w-full pt-6">
@@ -25,6 +24,16 @@ export function Sidebar() {
             </button>
           </Link>
         ))}
+        <form
+          action="/api/customer-auth/logout"
+          method="POST"
+        >
+          <button
+            className={`cursor-pointer ${pathname === "/api/customer-auth/logout" ? "text-black" : "text-neutral-400"} my-3 w-full`}
+          >
+            Logout
+          </button>
+        </form>
       </nav>
     </aside>
   );

@@ -50,8 +50,6 @@ export async function POST(request: NextRequest) {
       body_html,
     } = body;
 
-    console.log(`Syncing product: "${title}" (ID: ${id})`);
-
     //define product document
 
     const product = {
@@ -158,7 +156,7 @@ export async function POST(request: NextRequest) {
 
        */
 
-    console.log("checking for previous sync data...");
+    // console.log("checking for previous sync data...");
 
     //Set up our shopify connection
 
@@ -181,7 +179,7 @@ export async function POST(request: NextRequest) {
 
     //metafield found
     if (previousSync) {
-      console.log("Previous sync found, comparing differences...");
+      // console.log("Previous sync found, comparing differences...");
 
       //differences found
       if (diff(JSON.parse(previousSync.value), productCompare)) {
@@ -227,7 +225,7 @@ export async function POST(request: NextRequest) {
      * Begin Sanity Product Sync
      */
 
-    console.log("Writing product to Sanity...");
+    // console.log("Writing product to Sanity...");
 
     let stx = sanity.transaction();
 
