@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import getSingleOrder from "@/app/data/order/getSingleOrder";
 import { formatOrderDate } from "@/lib/formatDate";
 import { imageUrl } from "@/lib/imageUrl";
@@ -63,7 +64,7 @@ async function OrderDetails({
       </div>
 
       {/* ITEMS */}
-      <div className="flex flex-col gap-4 border-red-200 border w-full py-8">
+      <div className="flex flex-col gap-4 w-full py-8">
         {order.line_items.map((item: any) => (
           <div
             key={item.id}

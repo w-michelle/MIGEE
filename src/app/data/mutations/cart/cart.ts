@@ -30,10 +30,13 @@ export async function getShopifyCart(cartId: string) {
   }
 }
 
-export async function getCustomerCart(email: string) {
+export async function getCustomer(customerId: string) {
   //change it to query from DB
 
-  const data = await db.select().from(user).where(eq(user.email, email));
+  const data = await db
+    .select()
+    .from(user)
+    .where(eq(user.shopifyId, customerId));
 
   return data;
 }

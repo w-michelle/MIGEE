@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import getCustomerOrders from "@/app/data/order/order";
+
 import { formatOrderDate } from "@/lib/formatDate";
 import { HiArrowSmRight } from "react-icons/hi";
 import Link from "next/link";
+import { getCustomerProfile } from "@/app/data/order/getCustomerProfile";
 
 export default async function OrdersPage() {
-  const allOrders = await getCustomerOrders();
+  const data = await getCustomerProfile();
+  const allOrders = data.customer.orders;
 
-  if (allOrders.orders.length === 0) {
+  if (allOrders.edges.length === 0) {
     return (
       <div className=" flex flex-col mt-20 w-full">
         <h1>You haven&apos;t placed any orders yet.</h1>
@@ -32,28 +34,28 @@ export default async function OrdersPage() {
       {/* orders */}
 
       <div className="">
-        {allOrders.orders.map((order: any) => (
+        {allOrders.edges.map((order: any) => (
           <div
-            key={order.name}
+            key={order.node.id}
             className="grid grid-cols-5 text-xs border-b items-center py-4"
           >
             <Link
               href={{
                 pathname: "/account/order-details",
-                query: { orderNo: order.name },
+                query: { orderNo: order.node.name },
               }}
               className="underline"
             >
-              {order.name}
+              {order.node.name}
             </Link>
-            <div>{formatOrderDate(order.created_at)}</div>
+            <div>{formatOrderDate(order.node.processedAt)}</div>
             <div>
-              {order.fulfillment_status
-                ? order.fulfillment_status.charAt(0).toUpperCase() +
-                  order.fulfillment_status.slice(1)
+              {order.node.fulfillmentStatus
+                ? order.node.fulfillmentStatus.charAt(0).toUpperCase() +
+                  order.node.fulfillmentStatus.slice(1)
                 : "Pending"}
             </div>
-            <div>CA${order.current_total_price}</div>
+            <div>CA${order.node.totalPrice.amount}</div>
           </div>
         ))}
       </div>

@@ -55,10 +55,9 @@ export async function POST(req: Request) {
 
   if (!res.ok) {
     const error = await res.text();
-    console.log("error from api ", error);
+
     return NextResponse.json({ error }, { status: 500 });
   }
-  console.log("success ?", res);
 
   return NextResponse.json({ success: true });
 }

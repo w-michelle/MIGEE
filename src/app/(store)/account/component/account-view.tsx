@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 interface CustomerProps {
-  email: string;
+  emailAddress: {
+    emailAddress: string;
+  };
   firstName: string;
   lastName: string;
 }
@@ -22,7 +25,7 @@ const AccountView = ({ customer }: { customer: CustomerProps }) => {
           </div>
           <div>
             <dt className="font-bold">Email</dt>
-            <dd>{customer.email}</dd>
+            <dd>{customer.emailAddress.emailAddress}</dd>
           </div>
         </dl>
       </div>
