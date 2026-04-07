@@ -1,13 +1,10 @@
 "use client";
-import { usePathname } from "next/navigation";
 import { SidebarMenu } from "./sidebar-menu";
 import PortableTextBlock from "@/components/PortableText";
 import { MobileSidebarMenu } from "./mobile-sidebar-menu";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const PageContent = ({ pages, title, activePage }: any) => {
-  const pathname = usePathname();
-
   return (
     <main className="px-8 py-10 h-screen overflow-y-auto">
       <h1 className="pb-8">{title}</h1>

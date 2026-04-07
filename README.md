@@ -21,7 +21,7 @@ Together, this setup creates a more flexible worflow that aligns developers, des
 ## Features
 
 - Automatically sync products from Shopify to Sanity
-- Customer sign up / sign in using storefront api
+- Customer authentication using Customer Account API
 - Cart persisted and synced with Shopify across sessions
 - Real-time inventory check for products using SWR
 - Dynamic Page Routes for custom page create

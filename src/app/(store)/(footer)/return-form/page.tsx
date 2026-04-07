@@ -8,7 +8,7 @@ function Return() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const to = "customercare@migee.com";
+    const to = "customercare.migee@gmail.com";
     const subject = encodeURIComponent("Return Request");
     const body = encodeURIComponent(
       `Hello,\n\nI would like to request a return.\n\nEmail: ${email}\nOrder Number: ${orderNo}\n\nThank you`,
@@ -26,10 +26,12 @@ function Return() {
         <h1 className="text-center mb-14">Return Form</h1>
         <div>
           <p className="text-xs mb-14">
-            To submit your return request, please complete the form on the
-            following page. You will receive an email confirming your request,
-            and a member of our Customer care team will sent you a unique
-            authorization number together with return instructions.
+            To submit your return request, please email{" "}
+            <b>customercare.migee@gmail.com</b> with your order number and
+            reason for return or complete the form below. You will receive an
+            email confirming your request, and a member of our Customer care
+            team will send you a unique authorization number together with
+            return instructions.
           </p>
         </div>
         {/* form */}

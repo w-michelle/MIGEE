@@ -4,15 +4,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface FaqPageProps {
-  href?: string;
-  label?: string;
-  title?: string;
-  slug?: {
-    current: string;
-  };
-}
-
 export const SidebarMenu = ({ pages, title }: any) => {
   const pathname = usePathname();
 

@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { imageUrl } from "@/lib/imageUrl";
 import { PortableText } from "@portabletext/react";
-import { a } from "motion/react-client";
 import Link from "next/link";
 
 const components = {
