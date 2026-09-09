@@ -10,15 +10,14 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { colorInput } from "@sanity/color-input";
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from "./src/sanity/env";
 import { schema } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
-import path from "path";
 
+const apiVersion = "2025-11-12";
 export default defineConfig({
   basePath: "/studio",
-  projectId,
-  dataset,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.SANITY_STUDIO_DATASET!,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema: { types: schema.types },
   plugins: [

@@ -6,11 +6,14 @@
 import { defineCliConfig } from "sanity/cli";
 import path from "path";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
+const dataset = process.env.SANITY_STUDIO_DATASET;
 
 export default defineCliConfig({
   api: { projectId, dataset },
+  deployment: {
+    appId: "h11x3bnuhc6m0uj87yqrnx38",
+  },
   vite: (config: any) => {
     console.log("vite CONFIG HOOK IS RUNNING");
     return {
