@@ -6,7 +6,7 @@ import Image from "next/image";
 import { formatPrice } from "@/lib/formatPrice";
 import { useState } from "react";
 
-export type ProductWithVariants = Omit<Product, "optionSettings"> & {
+export type ProductWithVariants = Omit<Product, "optionSettings" | "seo"> & {
   optionSettings?: Product["optionSettings"] | null;
   variants: ProductVariant[];
   optionSettingsResolved?: Array<{
