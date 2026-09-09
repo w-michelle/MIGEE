@@ -1,3 +1,4 @@
+import { collection } from "./collection";
 import ProductPreviewMedia from "@/components/productPreviewMedia";
 
 import { TrolleyIcon } from "@sanity/icons";
@@ -40,6 +41,17 @@ export const product = defineType({
       readOnly: true,
       group: "content",
     }),
+
+    defineField({
+      title: "Primary Collection",
+      name: "primaryCollection",
+      type: "reference",
+      to: [{ type: "collection" }],
+      description:
+        "The main category this product belongs to shown in breadcrumb",
+      group: "content",
+    }),
+
     defineField({
       title: "Description",
       name: "description",

@@ -8,6 +8,7 @@ import ProductContent from "../components/ProductContent";
 import { Metadata } from "next";
 import { imageUrl } from "@/lib/imageUrl";
 import { toPlainText } from "next-sanity";
+import { generateProductSchema } from "@/lib/productSchema";
 
 type Props = {
   params: { slug: string };
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: seo?.metaTitle || product.title,
     description,
     alternates: {
-      canonical: `/products/${product.slug?.current}`,
+      canonical: `/product/${product.slug?.current}`,
     },
     openGraph: {
       title: seo?.shareTitle || product.title,
@@ -51,6 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : undefined,
     },
     twitter: {
+      card: "summary_large_image",
       title: seo?.shareTitle || product.title,
       description: shareDescription,
       images: ogImage ? [ogImage] : undefined,
@@ -62,12 +64,23 @@ async function ProductPage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
 
   const product = await getProductBySlug(slug);
+  console.log("product by slug", product);
 
   if (!product) {
     return notFound();
   }
 
-  return <ProductContent product={product} />;
+  const schema = generateProductSchema(product);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <ProductContent product={product} />
+    </>
+  );
 }
 
 export default ProductPage;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cookies } from "next/headers";
 
-export async function getCustomerTokenId() {
+export async function getCustomerAccessToken() {
   const cookieStore = await cookies();
 
   const token = cookieStore.get("customerAccessToken")?.value;

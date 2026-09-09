@@ -2,7 +2,6 @@
 import crypto from "crypto";
 import { createClient, IdentifiedSanityDocumentStub } from "@sanity/client";
 import { NextRequest, NextResponse } from "next/server";
-import { nanoid } from "nanoid";
 import { diff } from "jsondiffpatch";
 import axios from "axios";
 

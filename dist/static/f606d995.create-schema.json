@@ -1,0 +1,1664 @@
+[
+  {
+    "fields": [
+      {
+        "name": "h",
+        "type": "number",
+        "title": "Hue"
+      },
+      {
+        "name": "s",
+        "type": "number",
+        "title": "Saturation"
+      },
+      {
+        "name": "l",
+        "type": "number",
+        "title": "Lightness"
+      },
+      {
+        "name": "a",
+        "type": "number",
+        "title": "Alpha"
+      }
+    ],
+    "name": "hslaColor",
+    "type": "object",
+    "title": "Hue Saturation Lightness"
+  },
+  {
+    "fields": [
+      {
+        "name": "h",
+        "type": "number",
+        "title": "Hue"
+      },
+      {
+        "name": "s",
+        "type": "number",
+        "title": "Saturation"
+      },
+      {
+        "name": "v",
+        "type": "number",
+        "title": "Value"
+      },
+      {
+        "name": "a",
+        "type": "number",
+        "title": "Alpha"
+      }
+    ],
+    "name": "hsvaColor",
+    "type": "object",
+    "title": "Hue Saturation Value"
+  },
+  {
+    "fields": [
+      {
+        "name": "r",
+        "type": "number",
+        "title": "Red"
+      },
+      {
+        "name": "g",
+        "type": "number",
+        "title": "Green"
+      },
+      {
+        "name": "b",
+        "type": "number",
+        "title": "Blue"
+      },
+      {
+        "name": "a",
+        "type": "number",
+        "title": "Alpha"
+      }
+    ],
+    "name": "rgbaColor",
+    "type": "object",
+    "title": "Red Green Blue (rgb)"
+  },
+  {
+    "fields": [
+      {
+        "name": "hex",
+        "type": "string"
+      },
+      {
+        "name": "alpha",
+        "type": "number"
+      },
+      {
+        "name": "hsl",
+        "type": "hslaColor",
+        "title": "Hue Saturation Lightness"
+      },
+      {
+        "name": "hsv",
+        "type": "hsvaColor",
+        "title": "Hue Saturation Value"
+      },
+      {
+        "name": "rgb",
+        "type": "rgbaColor",
+        "title": "Red Green Blue (rgb)"
+      }
+    ],
+    "name": "color",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Display Title"
+      },
+      {
+        "readOnly": true,
+        "name": "shopifyDescription",
+        "type": "text"
+      },
+      {
+        "description": "The main category this product belongs to shown in breadcrumb",
+        "to": [
+          {
+            "type": "collection"
+          }
+        ],
+        "name": "primaryCollection",
+        "type": "reference"
+      },
+      {
+        "name": "description",
+        "type": "blockContent"
+      },
+      {
+        "description": "Define additional settings for product options",
+        "of": [
+          {
+            "type": "productOptionSettings",
+            "title": "Option Settings"
+          }
+        ],
+        "name": "optionSettings",
+        "type": "array"
+      },
+      {
+        "options": {
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / Share Settings"
+      },
+      {
+        "description": "Define a Gallery for your product, or for a subset of variants",
+        "of": [
+          {
+            "type": "productGalleryPhotos",
+            "title": "Gallery"
+          }
+        ],
+        "name": "galleryPhotos",
+        "type": "array",
+        "title": "Gallery"
+      },
+      {
+        "readOnly": true,
+        "name": "productTitle",
+        "type": "string",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "productID",
+        "type": "number",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "price",
+        "type": "number",
+        "title": "Price (cents)",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "comparePrice",
+        "type": "number",
+        "title": "Compare Price (cents)",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "inStock",
+        "type": "boolean",
+        "title": "In Stock?",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "lowStock",
+        "type": "boolean",
+        "title": "Low Stock?",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "sku",
+        "type": "string",
+        "title": "SKU",
+        "fieldset": "2up"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "hidden": true,
+        "name": "isDraft",
+        "type": "boolean",
+        "title": "Draft Mode",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "hidden": true,
+        "name": "wasDeleted",
+        "type": "boolean",
+        "title": "Deleted from Shopify?",
+        "fieldset": "2up"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "productImage",
+        "type": "url",
+        "title": "Shopify Image"
+      },
+      {
+        "of": [
+          {
+            "type": "productOption"
+          }
+        ],
+        "readOnly": false,
+        "name": "options",
+        "type": "array"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "2up",
+        "title": "",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "product",
+    "type": "document",
+    "title": "Products"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "(required)",
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "initialValue": false,
+        "description": "When activated the header willl overlay the first content module with a transparent background and white text until scrolling is enagaged.",
+        "name": "hasTransparentHeader",
+        "type": "boolean",
+        "title": "Overlay header with transparency?"
+      },
+      {
+        "of": [
+          {
+            "type": "hero"
+          },
+          {
+            "fieldsets": [
+              {
+                "name": "options",
+                "title": "",
+                "options": {
+                  "columns": 2
+                }
+              }
+            ],
+            "type": "marquee"
+          },
+          {
+            "type": "dividerPhoto",
+            "title": "Divider Media"
+          },
+          {
+            "to": [
+              {
+                "type": "section"
+              }
+            ],
+            "type": "reference",
+            "title": "Reusable Section"
+          }
+        ],
+        "name": "modules",
+        "type": "array",
+        "title": "Page Content"
+      },
+      {
+        "options": {
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / Share Settings"
+      }
+    ],
+    "name": "page",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Photo",
+              "value": "photo"
+            },
+            {
+              "title": "Video",
+              "value": "video"
+            }
+          ],
+          "layout": "radio",
+          "direction": "horizontal"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "photo",
+                  "video"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "bgType",
+        "type": "string",
+        "title": "Background Type"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Original",
+                      "value": 0
+                    },
+                    {
+                      "title": "1 : 1 (square)",
+                      "value": 1
+                    },
+                    {
+                      "title": "5 : 7",
+                      "value": 0.7142857143
+                    },
+                    {
+                      "title": "4: 6",
+                      "value": 0.6666666667
+                    },
+                    {
+                      "title": "16 : 9",
+                      "value": 1.7777777778
+                    }
+                  ]
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          0,
+                          1,
+                          0.7142857143,
+                          0.6666666667,
+                          1.7777777778
+                        ]
+                      },
+                      {
+                        "flag": "custom"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "customRatio",
+                "type": "number",
+                "title": "Display Size (aspect ratio)"
+              },
+              {
+                "description": "Important for SEO and accessibility.",
+                "name": "alt",
+                "type": "string",
+                "title": "Alternative text"
+              }
+            ],
+            "type": "image",
+            "name": "photo"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "photos",
+        "type": "array"
+      },
+      {
+        "fields": [
+          {
+            "description": "Alternatively, enter a vimeo ID to show a looping video instead",
+            "name": "id",
+            "type": "string",
+            "title": "Background Video"
+          },
+          {
+            "description": "Short title/description of the video",
+            "name": "title",
+            "type": "string",
+            "title": "Background Video Title"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "video",
+        "type": "object"
+      }
+    ],
+    "name": "hero",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Provide a name to reference this section. For internal use only.",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "length",
+                "constraint": 1
+              }
+            ],
+            "level": "error",
+            "message": "You can only have one piece of content"
+          }
+        ],
+        "of": [
+          {
+            "type": "hero"
+          },
+          {
+            "fieldsets": [
+              {
+                "name": "options",
+                "title": "",
+                "options": {
+                  "columns": 2
+                }
+              }
+            ],
+            "type": "marquee"
+          },
+          {
+            "type": "dividerPhoto",
+            "title": "Divider Media"
+          }
+        ],
+        "name": "content",
+        "type": "array"
+      }
+    ],
+    "name": "section",
+    "type": "document",
+    "title": "Reusable Section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "text",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "simple",
+            "title": "Text"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Original",
+                      "value": 0
+                    },
+                    {
+                      "title": "1 : 1 (square)",
+                      "value": 1
+                    },
+                    {
+                      "title": "5 : 7",
+                      "value": 0.7142857143
+                    },
+                    {
+                      "title": "4: 6",
+                      "value": 0.6666666667
+                    },
+                    {
+                      "title": "16 : 9",
+                      "value": 1.7777777778
+                    }
+                  ]
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          0,
+                          1,
+                          0.7142857143,
+                          0.6666666667,
+                          1.7777777778
+                        ]
+                      },
+                      {
+                        "flag": "custom"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "customRatio",
+                "type": "number",
+                "title": "Display Size (aspect ratio)"
+              },
+              {
+                "description": "Important for SEO and accessibility.",
+                "name": "alt",
+                "type": "string",
+                "title": "Alternative text"
+              }
+            ],
+            "type": "image",
+            "name": "photo"
+          },
+          {
+            "to": [
+              {
+                "type": "product"
+              }
+            ],
+            "type": "reference",
+            "name": "product"
+          }
+        ],
+        "name": "items",
+        "type": "array"
+      },
+      {
+        "initialValue": 0.5,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 1
+              },
+              {
+                "flag": "precision",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Pick a number between 0-1 (0.5 is the default)",
+        "name": "speed",
+        "type": "number"
+      },
+      {
+        "initialValue": false,
+        "name": "reverse",
+        "type": "boolean",
+        "title": "Reverse direction?",
+        "fieldset": "options"
+      },
+      {
+        "initialValue": false,
+        "name": "pausable",
+        "type": "boolean",
+        "title": "Pause on hover?",
+        "fieldset": "options"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "options",
+        "title": "",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "marquee",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 2
+              }
+            ],
+            "level": "error",
+            "message": "Please add at least 2 media items"
+          }
+        ],
+        "of": [
+          {
+            "type": "dividerMediaItem",
+            "title": "Media Item"
+          }
+        ],
+        "name": "media",
+        "type": "array",
+        "title": "Media (Side by Side"
+      }
+    ],
+    "name": "dividerPhoto",
+    "type": "object",
+    "title": "Divider Media"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Image",
+              "value": "image"
+            },
+            {
+              "title": "Video",
+              "value": "video"
+            }
+          ],
+          "layout": "radio",
+          "direction": "horizontal"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "image",
+                  "video"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "mediaType",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Original",
+                  "value": 0
+                },
+                {
+                  "title": "1 : 1 (square)",
+                  "value": 1
+                },
+                {
+                  "title": "5 : 7",
+                  "value": 0.7142857143
+                },
+                {
+                  "title": "4: 6",
+                  "value": 0.6666666667
+                },
+                {
+                  "title": "16 : 9",
+                  "value": 1.7777777778
+                }
+              ]
+            },
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "valid",
+                    "constraint": [
+                      0,
+                      1,
+                      0.7142857143,
+                      0.6666666667,
+                      1.7777777778
+                    ]
+                  },
+                  {
+                    "flag": "custom"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "customRatio",
+            "type": "number",
+            "title": "Display Size (aspect ratio)"
+          },
+          {
+            "description": "Important for SEO and accessibility.",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "options": {
+          "accept": "video/*"
+        },
+        "hidden": "conditional",
+        "name": "video",
+        "type": "file"
+      }
+    ],
+    "name": "dividerMediaItem",
+    "type": "object",
+    "title": "Media Item"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "(required)",
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "product"
+              }
+            ],
+            "type": "reference",
+            "title": "Product"
+          }
+        ],
+        "name": "products",
+        "type": "array",
+        "title": "Product Grid"
+      },
+      {
+        "options": {
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / Share Settings"
+      }
+    ],
+    "name": "collection",
+    "type": "document"
+  },
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/"
+                              ],
+                              "allowRelative": false,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        }
+                      ],
+                      "level": "error"
+                    }
+                  ],
+                  "name": "href",
+                  "type": "url",
+                  "title": "URL"
+                }
+              ],
+              "name": "link",
+              "type": "object",
+              "title": "URL"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Emphasis"
+            },
+            {
+              "value": "underline",
+              "title": "Underline"
+            }
+          ]
+        },
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bullet"
+          }
+        ],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h1",
+            "title": "H1"
+          },
+          {
+            "value": "h2",
+            "title": "H2"
+          },
+          {
+            "value": "h3",
+            "title": "H3"
+          },
+          {
+            "value": "h4",
+            "title": "H4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "type": "image"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array"
+  },
+  {
+    "fields": [
+      {
+        "name": "enabled",
+        "type": "boolean",
+        "title": "Enable Promo Bar?"
+      },
+      {
+        "description": "The text to show on the banner",
+        "name": "text",
+        "type": "string"
+      }
+    ],
+    "name": "promo",
+    "type": "document"
+  },
+  {
+    "options": {
+      "collapsible": true
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 50
+              }
+            ],
+            "level": "warning",
+            "message": "Longer titles may be truncated by search engines"
+          }
+        ],
+        "description": "Title used for search engines and browsers",
+        "name": "metaTitle",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 150
+              }
+            ],
+            "level": "warning",
+            "message": "Longer descriptions may be truncated by search engines"
+          }
+        ],
+        "description": "Description for search engines",
+        "name": "metaDesc",
+        "type": "text",
+        "title": "Meta Description"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 50
+              }
+            ],
+            "level": "warning",
+            "message": "Longer titles may be truncated by social sites"
+          }
+        ],
+        "description": "Title used for social sharing cards",
+        "name": "shareTitle",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 150
+              }
+            ],
+            "level": "warning",
+            "message": "Longer descriptions may be truncated by social sites"
+          }
+        ],
+        "description": "Description used for social sharing cards",
+        "name": "shareDesc",
+        "type": "text",
+        "title": "Share Description"
+      },
+      {
+        "description": "Recommended size: 1200x630 (PNG or JPG)",
+        "name": "shareGraphic",
+        "type": "image"
+      }
+    ],
+    "name": "seo",
+    "type": "object",
+    "title": "SEO / Share Settings"
+  },
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "position",
+        "type": "number"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "values",
+        "type": "array"
+      }
+    ],
+    "name": "productOption",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "position",
+        "type": "number"
+      }
+    ],
+    "name": "productOptionValue",
+    "type": "object",
+    "title": "Option"
+  },
+  {
+    "fields": [
+      {
+        "name": "forOption",
+        "type": "string",
+        "title": "Which option is this for?"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "to": [
+          {
+            "type": "solidColor"
+          }
+        ],
+        "name": "color",
+        "type": "reference",
+        "title": "Color Swatch"
+      }
+    ],
+    "name": "productOptionSettings",
+    "type": "object",
+    "title": "Option Settings"
+  },
+  {
+    "fields": [
+      {
+        "name": "forOption",
+        "type": "string",
+        "title": "Which variants is this for"
+      },
+      {
+        "options": {
+          "layout": "grid"
+        },
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Original",
+                      "value": 0
+                    },
+                    {
+                      "title": "1 : 1 (square)",
+                      "value": 1
+                    },
+                    {
+                      "title": "5 : 7",
+                      "value": 0.7142857143
+                    },
+                    {
+                      "title": "4: 6",
+                      "value": 0.6666666667
+                    },
+                    {
+                      "title": "16 : 9",
+                      "value": 1.7777777778
+                    }
+                  ]
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "valid",
+                        "constraint": [
+                          0,
+                          1,
+                          0.7142857143,
+                          0.6666666667,
+                          1.7777777778
+                        ]
+                      },
+                      {
+                        "flag": "custom"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "customRatio",
+                "type": "number",
+                "title": "Display Size (aspect ratio)"
+              },
+              {
+                "description": "Important for SEO and accessibility.",
+                "name": "alt",
+                "type": "string",
+                "title": "Alternative text"
+              }
+            ],
+            "type": "image",
+            "name": "photo"
+          }
+        ],
+        "name": "photos",
+        "type": "array",
+        "title": "Gallery Photo(s)"
+      }
+    ],
+    "name": "productGalleryPhotos",
+    "type": "object",
+    "title": "Gallery"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "For internal purposes, to help identify your colors",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "disableAlpha": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "color",
+        "type": "color"
+      }
+    ],
+    "name": "solidColor",
+    "type": "document",
+    "title": "Color"
+  },
+  {
+    "fields": [
+      {
+        "description": "Shown where variant names appear (for example: Above the product title in the cart",
+        "name": "title",
+        "type": "string",
+        "title": "Display Title"
+      },
+      {
+        "to": [
+          {
+            "type": "product"
+          }
+        ],
+        "readOnly": true,
+        "name": "product",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO / Share Settings"
+      },
+      {
+        "readOnly": true,
+        "name": "productTitle",
+        "type": "string",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "variantTitle",
+        "type": "string",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "productID",
+        "type": "number",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "variantID",
+        "type": "number",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "price",
+        "type": "number",
+        "title": "Price (cents)",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "comparePrice",
+        "type": "number",
+        "title": "Compare Price (cents)",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "inStock",
+        "type": "boolean",
+        "title": "In Stock?",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "lowStock",
+        "type": "boolean",
+        "title": "Low Stock?",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "name": "sku",
+        "type": "string",
+        "title": "SKU",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "hidden": true,
+        "name": "isDraft",
+        "type": "boolean",
+        "title": "Draft Mode",
+        "fieldset": "2up"
+      },
+      {
+        "readOnly": true,
+        "hidden": true,
+        "name": "wasDeleted",
+        "type": "boolean",
+        "title": "Deleted from Shopify",
+        "fieldset": "2up"
+      },
+      {
+        "of": [
+          {
+            "type": "productOptionValue",
+            "title": "Option"
+          }
+        ],
+        "readOnly": true,
+        "name": "options",
+        "type": "array"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "2up",
+        "title": "",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "productVariant",
+    "type": "document",
+    "title": "Variant"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Section Title"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "order",
+        "type": "number"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "infoPage"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to info page"
+          }
+        ],
+        "name": "pages",
+        "type": "array"
+      }
+    ],
+    "name": "footerSection",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Title / Question"
+      },
+      {
+        "name": "content",
+        "type": "blockContent",
+        "title": "Content / Answer"
+      }
+    ],
+    "name": "infoBlock",
+    "type": "object",
+    "title": "Section Item"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "of": [
+          {
+            "type": "infoBlock",
+            "title": "Section Item"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Content Items"
+      }
+    ],
+    "name": "infoPage",
+    "type": "document"
+  }
+]

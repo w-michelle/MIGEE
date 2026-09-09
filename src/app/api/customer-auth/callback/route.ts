@@ -157,7 +157,8 @@ export async function GET(request: NextRequest) {
         .where(eq(user.id, insertedUser[0].id));
     }
 
-    //#2 Update existing customer's customer access token on db. new customer's already added upon creation above
+    //#2 Update existing customer's customer access token on db because user logged in so a new token is given need to update db
+    // new customer's already added upon creation above
     if (existingCustomer.length !== 0) {
       const existingTokenRecord = await db.query.customerAccessToken.findFirst({
         where: eq(customerAccessToken.userId, existingCustomer[0].id),
@@ -189,7 +190,7 @@ export async function GET(request: NextRequest) {
     //#3 CARTID - If customer exists in db and has cartid set it to cookie, if not update db with new cartId and set cookie
     //new customer's cart added above upon creation
     if (existingCustomer.length !== 0 && existingCustomer?.[0]?.cartId) {
-      //customer has cartid so update it with new accesstoken from login
+      //customer has cartid so update it with new accesstoken from login (everytime user logs in a new token is generated)
       await attachCartToCustomer(existingCustomer[0].cartId, accessToken);
       response.cookies.set("cartId", existingCustomer[0].cartId);
     } else if (cartId) {
@@ -212,6 +213,7 @@ export async function GET(request: NextRequest) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
+      maxAge: tokenData.expires_in,
     });
 
     response.cookies.set({
@@ -221,6 +223,7 @@ export async function GET(request: NextRequest) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
+      maxAge: tokenData.expires_in,
     });
 
     return response;

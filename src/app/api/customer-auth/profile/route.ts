@@ -1,11 +1,11 @@
 import { customerAccessToken } from "./../../../../db/schema";
-import { getCustomerTokenId } from "@/lib/customer-session";
+import { getCustomerAccessToken } from "@/lib/customer-session";
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const tokenId = await getCustomerTokenId();
+  const tokenId = await getCustomerAccessToken();
 
   if (!tokenId) throw new Error("Not authenticated");
 

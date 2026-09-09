@@ -1,10 +1,10 @@
-import { getCustomerTokenId } from "@/lib/customer-session";
+import { getCustomerAccessToken } from "@/lib/customer-session";
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
 import { customerAccessToken } from "@/db/schema";
 
 export async function getCustomerProfile() {
-  const tokenId = await getCustomerTokenId();
+  const tokenId = await getCustomerAccessToken();
 
   if (!tokenId) return null;
 

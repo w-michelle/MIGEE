@@ -19,11 +19,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL ??
-  "https://arriving-man-moderately.ngrok-free.app";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: {
     template: "%s | MIGEE",
     default: "MIGEE | Handbags & Accessories",
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
     title: "MIGEE",
     description:
       "Discover our curated collection of handbags and accessories – perfect for everyday.",
-    images: `${baseUrl}/share-migee.png`,
+    images: [`${baseUrl}/share-migee.png`],
   },
 };
 
