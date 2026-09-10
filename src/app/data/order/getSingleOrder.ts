@@ -70,7 +70,7 @@ export default async function getSingleOrder(orderNo: string) {
 
           return {
             ...line,
-            image: variantImg?.photos[0].asset._ref ?? null,
+            image: variantImg?.photos?.[0].asset?._ref ?? null,
           };
         }),
       ),

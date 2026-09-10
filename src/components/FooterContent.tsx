@@ -18,7 +18,7 @@ export const FooterContent = ({ pages }: FooterContentProps) => {
             <h2 className="text-xs mb-2">{item.title}</h2>
             <ul className="text-xs text-neutral-400">
               {item.title == "Follow"
-                ? item.pages.map((itemLinks: any) => (
+                ? item.items?.map((itemLinks: any) => (
                     <li
                       key={itemLinks.title}
                       className="mb-2"
@@ -31,7 +31,7 @@ export const FooterContent = ({ pages }: FooterContentProps) => {
                       </Link>
                     </li>
                   ))
-                : item.pages.map((itemLinks: any) => (
+                : item.items?.map((itemLinks: any) => (
                     <li
                       key={itemLinks.title}
                       className="mb-2"
